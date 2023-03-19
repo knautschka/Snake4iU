@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Snake4iU</string>
+    <string name="spiel_starten">Spiel starten</string>
+    <string name="einstellungen">Einstellungen</string>
+    <string name="credits">Mitwirkende</string>
+    <string name="willkommen_zu">Willkommen zu</string>
+    <string name="snake_4_i_u">Snake 4 (i)U</string>
+</resources>
