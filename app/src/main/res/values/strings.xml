@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Snake4iU</string>
+    <string name="credits">Credits</string>
+    <string name="snake_4_i_u">Snake 4 (i)U</string>
+    <string name="spiel_starten">Start Game</string>
+    <string name="einstellungen">Settings</string>
+    <string name="willkommen_zu">Welcome to</string>
 </resources>
