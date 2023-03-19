@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SnakeActivity">
+
+    <ImageButton
+        android:id="@+id/button_up"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/button_oben"
+        tools:layout_editor_absoluteX="226dp"
+        tools:layout_editor_absoluteY="492dp" />
+
+    <ImageButton
+        android:id="@+id/button_left"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/button_links"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="570dp" />
+
+    <ImageButton
+        android:id="@+id/button_right"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/button_rechts"
+        tools:layout_editor_absoluteX="400dp"
+        tools:layout_editor_absoluteY="570dp" />
+
+    <ImageButton
+        android:id="@+id/button_down"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/button_unten"
+        tools:layout_editor_absoluteX="226dp"
+        tools:layout_editor_absoluteY="663dp" />
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/zurueck_button"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
