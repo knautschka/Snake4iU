@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.media.MediaPlayer
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -25,6 +26,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     private var gameOver = false;
     private var score = 0
+
+    private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
+    private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
+    private val mpDie = MediaPlayer.create(context, R.raw.snake_die)
 
     init {
         holder.addCallback(this)
@@ -49,6 +54,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         generateNewApple()
         score = 0
+
+        mpStart.start()
     }
 
 
@@ -96,6 +103,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 generateNewApple()
                 gameEngine.increaseSpeed()
                 updateScore()
+                mpApple.start()
             }
 
             when (direction) {
@@ -171,6 +179,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         if(gameOver) {
             (context as SnakeActivity).gameOver()
+            mpDie.start()
         }
 
         return gameOver
