@@ -19,7 +19,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
@@ -34,7 +34,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:src="@drawable/button_oben"
+                android:layout_margin="20dp"
                 android:onClick="onUp"/>
 
             <ImageView

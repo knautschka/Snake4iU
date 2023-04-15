@@ -40,6 +40,9 @@ class SnakeActivity : AppCompatActivity() {
     }
 
     fun updateScore(newScore: Int) {
-        score.text = newScore.toString()
+        runOnUiThread() {
+            score.text = newScore.toString()
+        }
+
     }
 }
