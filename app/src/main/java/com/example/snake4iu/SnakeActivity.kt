@@ -28,6 +28,18 @@ class SnakeActivity : AppCompatActivity() {
     }
 
     fun onGameStart(v: View) {
+        score.text = "0"
+        gameOver.visibility = View.GONE
+        gameManager.initGame()
+    }
 
+    fun gameOver() {
+        runOnUiThread() {
+            gameOver.visibility = View.VISIBLE
+        }
+    }
+
+    fun updateScore(newScore: Int) {
+        score.text = newScore.toString()
     }
 }

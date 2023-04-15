@@ -23,6 +23,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var movingDirection = Direction.LEFT
     private var updatedDirection = Direction.LEFT
 
+    private var gameOver = false;
+    private var score = 0
+
     init {
         holder.addCallback(this)
         pointSize = w * 0.9f / boardSize
@@ -31,6 +34,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun initGame() {
+        gameOver = false
         snake.clear()
         val initialPoint = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
         snake.add(initialPoint)
@@ -40,7 +44,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
 
         generateNewApple()
+        score = 0
     }
+
 
     fun generateNewApple() {
         var valid = false
@@ -66,28 +72,104 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun update() {
-        val direction = updatedDirection
+        if(!gameOver && !checkCollision()) {
+            val direction = updatedDirection
 
-        val lastPoint = Point(snake[snake.size - 1].x, snake[snake.size -1].y)
+            val lastPoint = Point(snake[snake.size - 1].x, snake[snake.size - 1].y)
 
-        if(snake.size > 1) {
-            for(i in snake.size - 1 downTo 1) {
-                if(snake[i].x != snake[i-1].x) {
-                    snake[i].x = snake[i-1].x
+            if (snake.size > 1) {
+                for (i in snake.size - 1 downTo 1) {
+                    if (snake[i].x != snake[i - 1].x) {
+                        snake[i].x = snake[i - 1].x
+                    } else {
+                        snake[i].y = snake[i - 1].y
+                    }
+                }
+            }
+
+            if (snake[0].x == apple.x && snake[0].y == apple.y) {
+                snake.add(lastPoint)
+                generateNewApple()
+                gameEngine.increaseSpeed()
+                updateScore()
+            }
+
+            when (direction) {
+                Direction.LEFT -> snake[0].x--
+                Direction.RIGHT -> snake[0].x++
+                Direction.UP -> snake[0].y--
+                Direction.DOWN -> snake[0].y++
+            }
+
+            movingDirection = updatedDirection
+        }
+    }
+
+    fun updateScore() {
+        score ++
+        (context as SnakeActivity).updateScore(score)
+    }
+
+    fun checkCollision(): Boolean {
+        when(updatedDirection) {
+            Direction.UP -> {
+                if(snake[0].y == 0) {
+                    gameOver = true
                 } else {
-                    snake[i].y = snake[i-1].y
+                    for(i in 1 until snake.size -1) {
+                        if(snake[0].x == snake[i].x && snake[0].y -1 == snake[i].y) {
+                            gameOver = true
+                            break
+                        }
+                    }
+                }
+            }
+
+            Direction.DOWN -> {
+                if(snake[0].y == boardSize -1) {
+                    gameOver = true
+                } else {
+                    for(i in 1 until snake.size -1) {
+                        if(snake[0].x == snake[i].x && snake[0].y + 1 == snake[i].y) {
+                            gameOver = true
+                            break
+                        }
+                    }
+                }
+            }
+
+            Direction.LEFT -> {
+                if(snake[0].x == 0) {
+                    gameOver = true
+                } else {
+                    for(i in 1 until snake.size -1) {
+                        if(snake[0].y == snake[i].y && snake[0].x - 1 == snake[i].x) {
+                            gameOver = true
+                            break
+                        }
+                    }
+                }
+            }
+
+            Direction.RIGHT -> {
+                if(snake[0].x == boardSize -1) {
+                    gameOver = true
+                } else {
+                    for(i in 1 until snake.size -1) {
+                        if(snake[0].y == snake[i].y && snake[0].x + 1 == snake[i].x) {
+                            gameOver = true
+                            break
+                        }
+                    }
                 }
             }
         }
 
-        when(direction) {
-            Direction.LEFT -> snake[0].x --
-            Direction.RIGHT -> snake[0].x ++
-            Direction.UP -> snake[0].y --
-            Direction.DOWN -> snake[0].y ++
+        if(gameOver) {
+            (context as SnakeActivity).gameOver()
         }
 
-        movingDirection = updatedDirection
+        return gameOver
     }
 
     override fun draw(canvas: Canvas?) {
