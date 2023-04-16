@@ -10,6 +10,7 @@ import android.media.MediaPlayer
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import java.util.Objects
 import java.util.Random
 
 class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(context, attributeSet), SurfaceHolder.Callback {
@@ -19,6 +20,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var w = Resources.getSystem().displayMetrics.widthPixels
     private var h = Resources.getSystem().displayMetrics.heightPixels
     private lateinit var apple:Point
+    private lateinit var apple2:Point
+    private lateinit var apple3:Point
+
     private val snake = arrayListOf<Point>()
     private val gameEngine = GameEngine(holder, this)
     private var movingDirection = Direction.LEFT
@@ -53,6 +57,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
 
         generateNewApple()
+
+
         score = 0
 
         mpStart.start()
@@ -64,8 +70,13 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         while(!valid) {
             valid = true
             apple = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+            apple2 = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+            apple3 = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+
             for(snakePoint: Point in snake) {
-                if(apple.x == snakePoint.x && apple.y == snakePoint.y) {
+                if((apple.x == snakePoint.x && apple.y == snakePoint.y) ||
+                        (apple2.x == snakePoint.x && apple2.y == snakePoint.y) ||
+                        (apple3.x == snakePoint.x && apple3.y == snakePoint.y))  {
                     valid = false
                     break
                 }
@@ -100,10 +111,33 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
             if (snake[0].x == apple.x && snake[0].y == apple.y) {
                 snake.add(lastPoint)
-                generateNewApple()
+                apple.x = 1000
+                    apple.y = 1000
                 gameEngine.increaseSpeed()
                 updateScore()
                 mpApple.start()
+            }
+
+            if (snake[0].x == apple2.x && snake[0].y == apple2.y) {
+                snake.add(lastPoint)
+                apple2.x = 1000
+                apple2.y = 1000
+                gameEngine.increaseSpeed()
+                updateScore()
+                mpApple.start()
+            }
+            if (snake[0].x == apple3.x && snake[0].y == apple3.y) {
+                snake.add(lastPoint)
+                apple3.x = 1000
+                apple3.y = 1000
+                gameEngine.increaseSpeed()
+                updateScore()
+                mpApple.start()
+            }
+
+            if(score % 3 == 0 && score > 0) {
+                generateNewApple()
+                score = 0
             }
 
             when (direction) {
@@ -215,7 +249,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         applePaint.color = Color.GREEN
 
         canvas?.drawRect(getPointRectangle(apple), applePaint)
+        canvas?.drawRect(getPointRectangle(apple2), applePaint)
+        canvas?.drawRect(getPointRectangle(apple3), applePaint)
     }
+
 
     fun drawSnake(canvas: Canvas?) {
         val snakePaint = Paint()
