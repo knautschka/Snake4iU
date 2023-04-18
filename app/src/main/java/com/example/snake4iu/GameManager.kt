@@ -7,9 +7,11 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.media.MediaPlayer
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import java.util.Objects
 import java.util.Random
 
 class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(context, attributeSet), SurfaceHolder.Callback {
@@ -19,13 +21,16 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var w = Resources.getSystem().displayMetrics.widthPixels
     private var h = Resources.getSystem().displayMetrics.heightPixels
     private lateinit var apple:Point
+    private val appleList = arrayListOf<Point>()
+
     private val snake = arrayListOf<Point>()
     private val gameEngine = GameEngine(holder, this)
     private var movingDirection = Direction.LEFT
     private var updatedDirection = Direction.LEFT
 
     private var gameOver = false;
-    private var score = 0
+    private var appleSnacked = 0
+    private var level = 1
 
     private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
     private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
@@ -42,6 +47,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         gameEngine.reset()
         gameOver = false
         snake.clear()
+        appleList.clear()
+        level = 1
+        appleSnacked = 0
         val initialPoint = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
         snake.add(initialPoint)
         if(initialPoint.x < boardSize / 2) {
@@ -51,24 +59,29 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             movingDirection = Direction.LEFT
             updatedDirection = Direction.LEFT
         }
-
         generateNewApple()
-        score = 0
-
         mpStart.start()
     }
 
 
     fun generateNewApple() {
         var valid = false
+        appleList.clear()
         while(!valid) {
             valid = true
-            apple = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+            for(i in 0..level-1) {
+                apple = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+                appleList.add(apple)
+            }
+
             for(snakePoint: Point in snake) {
-                if(apple.x == snakePoint.x && apple.y == snakePoint.y) {
-                    valid = false
-                    break
+                for(i in 0..appleList.size-1) {
+                    if(appleList.get(i).x.equals(snakePoint.x) && appleList.get(i).y.equals(snakePoint.y))  {
+                        valid = false
+                        break
+                    }
                 }
+
             }
         }
     }
@@ -98,12 +111,21 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 }
             }
 
-            if (snake[0].x == apple.x && snake[0].y == apple.y) {
-                snake.add(lastPoint)
+            for(i in 0..appleList.size-1) {
+                if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
+                    snake.add(lastPoint)
+                    appleList.get(i).x = 1000
+                    appleList.get(i).y = 1000
+                    gameEngine.increaseSpeed()
+                    appleSnacked ++
+                    mpApple.start()
+                }
+            }
+
+            if(appleSnacked == appleList.size) {
+                updateLevel()
                 generateNewApple()
-                gameEngine.increaseSpeed()
-                updateScore()
-                mpApple.start()
+                appleSnacked = 0
             }
 
             when (direction) {
@@ -117,9 +139,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
     }
 
-    fun updateScore() {
-        score ++
-        (context as SnakeActivity).updateScore(score)
+    fun updateLevel() {
+        level ++
+        (context as SnakeActivity).updateLevel(level)
     }
 
     fun checkCollision(): Boolean {
@@ -190,6 +212,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         drawBoard(canvas)
         drawApple(canvas)
+        drawNumbers(canvas)
         drawSnake(canvas)
 
     }
@@ -211,11 +234,30 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun drawApple(canvas: Canvas?) {
-        val applePaint = Paint()
-        applePaint.color = Color.GREEN
+            val applePaint = Paint()
+            applePaint.color = Color.GREEN
 
-        canvas?.drawRect(getPointRectangle(apple), applePaint)
+            for(i in 0..appleList.size-1) {
+                canvas?.drawRect(getPointRectangle(appleList.get(i)), applePaint)
+            }
+
     }
+
+    fun drawNumbers(canvas: Canvas?) {
+
+        val textPaint = Paint()
+        textPaint.color = Color.BLACK
+        textPaint.textSize = 40F
+        textPaint.isAntiAlias = true
+        textPaint.style = Paint.Style.FILL
+
+        for(i in 0..appleList.size-1) {
+            canvas?.drawText((i+1).toString(),
+                getPointRectangle(appleList.get(i)).centerX().toFloat() -10F, getPointRectangle(appleList.get(i)).centerY().toFloat()+10F, textPaint)
+        }
+
+    }
+
 
     fun drawSnake(canvas: Canvas?) {
         val snakePaint = Paint()
