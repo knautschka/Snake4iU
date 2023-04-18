@@ -39,10 +39,9 @@ class SnakeActivity : AppCompatActivity() {
         }
     }
 
-    fun updateScore(newScore: Int) {
+    fun updateLevel(newLevel: Int) {
         runOnUiThread() {
-            score.text = newScore.toString()
+            score.text = "Level " + newLevel.toString()
         }
-
     }
 }
