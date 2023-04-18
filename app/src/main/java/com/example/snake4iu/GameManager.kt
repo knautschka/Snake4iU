@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.media.MediaPlayer
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -30,6 +31,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     private var gameOver = false;
     private var score = 0
+    private var appleSnacked = 0
 
     private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
     private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
@@ -46,6 +48,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         gameEngine.reset()
         gameOver = false
         snake.clear()
+        appleSnacked == 0
         val initialPoint = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
         snake.add(initialPoint)
         if(initialPoint.x < boardSize / 2) {
@@ -114,23 +117,26 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 apple.x = 1000
                     apple.y = 1000
                 gameEngine.increaseSpeed()
+                appleSnacked ++
                 updateScore()
                 mpApple.start()
             }
 
-            if (snake[0].x == apple2.x && snake[0].y == apple2.y) {
+            if (snake[0].x == apple2.x && snake[0].y == apple2.y && appleSnacked == 1) {
                 snake.add(lastPoint)
                 apple2.x = 1000
                 apple2.y = 1000
                 gameEngine.increaseSpeed()
+                appleSnacked ++
                 updateScore()
                 mpApple.start()
             }
-            if (snake[0].x == apple3.x && snake[0].y == apple3.y) {
+            if (snake[0].x == apple3.x && snake[0].y == apple3.y && appleSnacked == 2) {
                 snake.add(lastPoint)
                 apple3.x = 1000
                 apple3.y = 1000
                 gameEngine.increaseSpeed()
+                appleSnacked = 0
                 updateScore()
                 mpApple.start()
             }
@@ -224,6 +230,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         drawBoard(canvas)
         drawApple(canvas)
+        drawNumbers(canvas)
         drawSnake(canvas)
 
     }
@@ -245,12 +252,28 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun drawApple(canvas: Canvas?) {
-        val applePaint = Paint()
-        applePaint.color = Color.GREEN
+            val applePaint = Paint()
+            applePaint.color = Color.GREEN
 
-        canvas?.drawRect(getPointRectangle(apple), applePaint)
-        canvas?.drawRect(getPointRectangle(apple2), applePaint)
-        canvas?.drawRect(getPointRectangle(apple3), applePaint)
+            canvas?.drawRect(getPointRectangle(apple), applePaint)
+            canvas?.drawRect(getPointRectangle(apple2), applePaint)
+            canvas?.drawRect(getPointRectangle(apple3), applePaint)
+    }
+
+    fun drawNumbers(canvas: Canvas?) {
+
+        val textPaint = Paint()
+        textPaint.color = Color.BLACK
+        textPaint.textSize = 40F
+        textPaint.isAntiAlias = true
+        textPaint.style = Paint.Style.FILL
+
+        canvas?.drawText("1",
+            getPointRectangle(apple).centerX().toFloat() -10F, getPointRectangle(apple).centerY().toFloat()+10F, textPaint)
+        canvas?.drawText("2",
+            getPointRectangle(apple2).centerX().toFloat() -10F, getPointRectangle(apple2).centerY().toFloat()+10F, textPaint)
+        canvas?.drawText("3",
+            getPointRectangle(apple3).centerX().toFloat() -10F, getPointRectangle(apple3).centerY().toFloat()+10F, textPaint)
     }
 
 
