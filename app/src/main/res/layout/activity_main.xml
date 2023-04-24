@@ -29,6 +29,7 @@
         android:layout_marginStart="41dp"
         android:layout_marginEnd="41dp"
         android:layout_marginBottom="30dp"
+        android:onClick="startSettings"
         android:text="@string/einstellungen"
         app:layout_constraintBottom_toTopOf="@+id/credits"
         app:layout_constraintEnd_toEndOf="parent"
