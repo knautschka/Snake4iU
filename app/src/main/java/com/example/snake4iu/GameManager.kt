@@ -100,6 +100,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             val direction = updatedDirection
 
             val lastPoint = Point(snake[snake.size - 1].x, snake[snake.size - 1].y)
+            snake.add(lastPoint)
 
             if (snake.size > 1) {
                 for (i in snake.size - 1 downTo 1) {
@@ -113,7 +114,6 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
             for(i in 0..appleList.size-1) {
                 if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
-                    snake.add(lastPoint)
                     appleList.get(i).x = 1000
                     appleList.get(i).y = 1000
                     gameEngine.increaseSpeed()
@@ -124,8 +124,11 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
             if(appleSnacked == appleList.size) {
                 updateLevel()
+                snake.clear()
                 generateNewApple()
                 appleSnacked = 0
+                val initialPoint = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+                snake.add(initialPoint)
             }
 
             when (direction) {
