@@ -1,5 +1,6 @@
 package com.example.snake4iu;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SettingsActivity extends AppCompatActivity {
 
     public static float speed = 1;
+    public static int snakeColor = Color.rgb(255,165,0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked) {
                     speed = 1f;
+                    snakeColor = Color.rgb(255,165,0);
                 }
             }
         });
@@ -33,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked) {
                     speed = 2f;
+                    snakeColor = Color.BLACK;
                 }
             }
         });
@@ -41,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 speed = 3f;
+                snakeColor = Color.RED;
             }
         });
     }
