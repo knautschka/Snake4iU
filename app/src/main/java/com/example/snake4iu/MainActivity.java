@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createNotificationChannel();
+
+        Intent intent = new Intent(this, MyIntentService.class);
+        this.startService(intent);
     }
 
     @Override
@@ -37,5 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    private void createNotificationChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "1",
+                    "App-Benachrichtigungskanal",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
 }

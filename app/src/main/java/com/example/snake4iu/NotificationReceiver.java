@@ -15,7 +15,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         createNotificationChannel(context);
     }
 
-    private static void createNotificationChannel(Context context) {
+    public static void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     "1",
