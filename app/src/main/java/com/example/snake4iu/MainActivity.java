@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void startCredits(View view) {
+        Intent intent = new Intent(this, CreditsActivity.class);
+
+        startActivity(intent);
+    }
+
     public void sendMail(View view) {
         String[] to = {"example@example.com"};
         Intent intent = new Intent(Intent.ACTION_SEND);
