@@ -16,85 +16,201 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-    <!--  -->
+
+
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
         >
 
-
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <!--  PunkteAnzeige -->
+            <TextView
+                android:id="@+id/scorePoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:gravity="left"
+                android:text="Punkte: 200"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:elevation="5dp"/>
+
+    <!--Steuerkreuz ende-->
+    <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Space
+        <Space
+            android:layout_width="27dp"
+            android:layout_height="match_parent" />
+
+            <LinearLayout
                 android:layout_width="50dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+
+                <ImageButton
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:onClick="onLeft"
+                    app:srcCompat="@drawable/links" />
+                />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:onClick="onUp"
+                    app:srcCompat="@drawable/oben" />
+
+                />
+
+                <ImageButton
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/mitte" />
+                />
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/black"
+                    android:onClick="onDown"
+                    app:srcCompat="@drawable/unten" />
+                />
 
 
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:onClick="onLeft"
-                android:src="@drawable/button_links" />
-        </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+                <ImageButton
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:onClick="onRight"
+                    app:srcCompat="@drawable/rechts" />
+                />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+
+            </LinearLayout>
+            <!--Steuerkreuz ende-->
+
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+
+
+        <!-- Turbo Button anfang-->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="40dp"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:onClick="onUp"
-                android:src="@drawable/button_oben" />
-
+                android:layout_height="50dp"/>
+            <ImageButton
+                android:background="@color/white"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:onClick="onRight"
+                app:srcCompat="@drawable/tbuttonwa" />
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="40dp"/>
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:onClick="onDown"
-                android:src="@drawable/button_unten" />
-
+                android:layout_height="match_parent"/>
         </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="20dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/button_rechts"
-            android:onClick="onRight"/>
         <Space
-            android:layout_width="50dp"
+            android:layout_width="7dp"
             android:layout_height="match_parent" />
 
+        <LinearLayout
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageButton
+                android:background="@color/white"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:onClick="onRight"
+                app:srcCompat="@drawable/tbuttonwb" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <!-- Turbo Button Ende-->
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+
+        <!-- Turbo Button ende-->
+        </LinearLayout>
     </LinearLayout>
+
+
+
+
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/score"
