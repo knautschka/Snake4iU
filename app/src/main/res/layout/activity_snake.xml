@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SnakeActivity">
 
+    <!--  -->
     <com.example.snake4iu.GameManager
         android:id="@+id/gameManager"
         android:layout_width="0dp"
@@ -15,50 +16,84 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-
+    <!--  -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
         >
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/button_links"
-            android:onClick="onLeft"
-            android:layout_gravity="center"/>
+
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="onLeft"
+                android:src="@drawable/button_links" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="200dp"
             android:layout_weight="1"
             android:orientation="vertical">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:src="@drawable/button_oben"
-                android:layout_margin="20dp"
-                android:onClick="onUp"/>
+                android:layout_height="60dp"
+                android:onClick="onUp"
+                android:src="@drawable/button_oben" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:src="@drawable/button_unten"
-                android:onClick="onDown"/>
+                android:layout_height="60dp"
+                android:onClick="onDown"
+                android:src="@drawable/button_unten" />
 
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:src="@drawable/button_rechts"
             android:onClick="onRight"/>
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
     </LinearLayout>
 
     <TextView
