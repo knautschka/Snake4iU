@@ -147,8 +147,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun checkCollision(): Boolean {
         when(updatedDirection) {
+
             Direction.UP -> {
-                if(snake[0].y == 0) {
+                if(snake[0].y == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
                     gameOver = true
                 } else {
                     for(i in 1 until snake.size -1) {
@@ -161,7 +162,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             }
 
             Direction.DOWN -> {
-                if(snake[0].y == boardSize -1) {
+                if(snake[0].y == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
                     gameOver = true
                 } else {
                     for(i in 1 until snake.size -1) {
@@ -174,7 +175,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             }
 
             Direction.LEFT -> {
-                if(snake[0].x == 0) {
+                if(snake[0].x == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
                     gameOver = true
                 } else {
                     for(i in 1 until snake.size -1) {
@@ -187,7 +188,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             }
 
             Direction.RIGHT -> {
-                if(snake[0].x == boardSize -1) {
+                if(snake[0].x == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
                     gameOver = true
                 } else {
                     for(i in 1 until snake.size -1) {
