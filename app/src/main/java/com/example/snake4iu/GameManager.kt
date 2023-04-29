@@ -48,7 +48,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         appleList.clear()
         level = 1
         appleSnacked = 0
-        val initialPoint = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+        val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
         snake.add(initialPoint)
         if(initialPoint.x < boardSize / 2) {
             movingDirection = Direction.RIGHT
@@ -125,7 +125,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 snake.clear()
                 generateNewApple()
                 appleSnacked = 0
-                val initialPoint = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+                val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
                 snake.add(initialPoint)
             }
 
