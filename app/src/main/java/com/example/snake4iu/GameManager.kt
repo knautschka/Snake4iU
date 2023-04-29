@@ -127,6 +127,13 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 appleSnacked = 0
                 val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
                 snake.add(initialPoint)
+                if(initialPoint.x < boardSize / 2) {
+                    movingDirection = Direction.RIGHT
+                    updatedDirection = Direction.RIGHT
+                } else {
+                    movingDirection = Direction.LEFT
+                    updatedDirection = Direction.LEFT
+                }
             }
 
             when (direction) {
