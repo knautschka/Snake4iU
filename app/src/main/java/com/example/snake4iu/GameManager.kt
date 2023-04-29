@@ -94,6 +94,33 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun update() {
+
+        for(i in 0..appleList.size-1) {
+            if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
+                appleList.get(i).x = 1000
+                appleList.get(i).y = 1000
+                gameEngine.increaseSpeed()
+                appleSnacked ++
+                mpApple.start()
+            }
+        }
+
+        if(appleSnacked == appleList.size) {
+            updateLevel()
+            snake.clear()
+            generateNewApple()
+            appleSnacked = 0
+            val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
+            snake.add(initialPoint)
+            if(initialPoint.x < boardSize / 2) {
+                movingDirection = Direction.RIGHT
+                updatedDirection = Direction.RIGHT
+            } else {
+                movingDirection = Direction.LEFT
+                updatedDirection = Direction.LEFT
+            }
+        }
+
         if(!gameOver && !checkCollision()) {
             val direction = updatedDirection
 
@@ -110,31 +137,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 }
             }
 
-            for(i in 0..appleList.size-1) {
-                if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
-                    appleList.get(i).x = 1000
-                    appleList.get(i).y = 1000
-                    gameEngine.increaseSpeed()
-                    appleSnacked ++
-                    mpApple.start()
-                }
-            }
 
-            if(appleSnacked == appleList.size) {
-                updateLevel()
-                snake.clear()
-                generateNewApple()
-                appleSnacked = 0
-                val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
-                snake.add(initialPoint)
-                if(initialPoint.x < boardSize / 2) {
-                    movingDirection = Direction.RIGHT
-                    updatedDirection = Direction.RIGHT
-                } else {
-                    movingDirection = Direction.LEFT
-                    updatedDirection = Direction.LEFT
-                }
-            }
 
             when (direction) {
                 Direction.LEFT -> snake[0].x--
