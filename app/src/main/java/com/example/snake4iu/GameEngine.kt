@@ -29,7 +29,7 @@ class GameEngine(var surfaceHolder: SurfaceHolder?, val gameManager: GameManager
         var targetTime: Long
 
         while(running) {
-            targetTime = (1000 / targetFPS).toLong()
+            targetTime = (500 / targetFPS).toLong()
             startTime = System.nanoTime()
             canvas = null
 

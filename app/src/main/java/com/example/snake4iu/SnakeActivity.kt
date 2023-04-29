@@ -1,11 +1,16 @@
 package com.example.snake4iu
 
+import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import kotlinx.android.synthetic.main.activity_snake.*
 
 class SnakeActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_snake)
@@ -13,18 +18,22 @@ class SnakeActivity : AppCompatActivity() {
 
     fun onUp(v: View) {
         gameManager.move(Direction.UP)
+        vibrate()
     }
 
     fun onDown(v: View) {
         gameManager.move(Direction.DOWN)
+        vibrate()
     }
 
     fun onLeft(v: View) {
         gameManager.move(Direction.LEFT)
+        vibrate()
     }
 
     fun onRight(v: View) {
         gameManager.move(Direction.RIGHT)
+        vibrate()
     }
 
     fun onGameStart(v: View) {
@@ -44,4 +53,16 @@ class SnakeActivity : AppCompatActivity() {
             score.text = "Level " + newLevel.toString()
         }
     }
+
+    private fun vibrate() {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if(vibrator.hasVibrator()) {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(100)
+            }
+        }
+    }
+
 }

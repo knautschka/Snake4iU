@@ -75,6 +75,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             for(i in 0..level-1) {
                 for(j in i+1..level-1) {
                     if(appleList.get(i).x == appleList.get(j).x && appleList.get(i).y == appleList.get(j).y) {
+                        appleList.clear()
                         valid = false
                         break
                     }
@@ -84,6 +85,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             for(snakePoint: Point in snake) {
                 for(i in 0..appleList.size-1) {
                     if(appleList.get(i).x.equals(snakePoint.x) && appleList.get(i).y.equals(snakePoint.y))  {
+                        appleList.clear()
                         valid = false
                         break
                     }
