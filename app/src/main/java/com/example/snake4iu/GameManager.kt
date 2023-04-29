@@ -112,6 +112,16 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 appleSnacked ++
                 mpApple.start()
             }
+
+            if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked) {
+                gameOver = true
+                break
+            }
+        }
+
+        if(gameOver) {
+            (context as SnakeActivity).gameOver()
+            mpDie.start()
         }
 
         if(appleSnacked == appleList.size) {
