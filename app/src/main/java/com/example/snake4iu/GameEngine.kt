@@ -8,7 +8,7 @@ import java.lang.Exception
 class GameEngine(var surfaceHolder: SurfaceHolder?, val gameManager: GameManager): Thread() {
     private var running = false
     private var canvas: Canvas? = null
-    private var targetFPS = 3f
+    private var targetFPS = SettingsActivity.speed
 
     fun setRunning(isRunning: Boolean) {
         running = isRunning
@@ -19,7 +19,7 @@ class GameEngine(var surfaceHolder: SurfaceHolder?, val gameManager: GameManager
     }
 
     fun reset() {
-        targetFPS = 3f
+        targetFPS = SettingsActivity.speed
     }
 
     override fun run() {

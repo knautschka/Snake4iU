@@ -7,11 +7,9 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.media.MediaPlayer
-import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import java.util.Objects
 import java.util.Random
 
 class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(context, attributeSet), SurfaceHolder.Callback {
@@ -100,6 +98,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             val direction = updatedDirection
 
             val lastPoint = Point(snake[snake.size - 1].x, snake[snake.size - 1].y)
+            snake.add(lastPoint)
 
             if (snake.size > 1) {
                 for (i in snake.size - 1 downTo 1) {
@@ -113,7 +112,6 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
             for(i in 0..appleList.size-1) {
                 if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
-                    snake.add(lastPoint)
                     appleList.get(i).x = 1000
                     appleList.get(i).y = 1000
                     gameEngine.increaseSpeed()
@@ -124,8 +122,11 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
             if(appleSnacked == appleList.size) {
                 updateLevel()
+                snake.clear()
                 generateNewApple()
                 appleSnacked = 0
+                val initialPoint = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+                snake.add(initialPoint)
             }
 
             when (direction) {
@@ -224,18 +225,25 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         val boardTop = h * 0.1f
         val boardBottom = h * 0.1f + boardSize * pointSize
 
+        val boardBackground = Paint()
+        boardBackground.color = Color.rgb(0,188,212)
+
+        canvas?.drawRect(boardLeft, boardTop, boardRight, boardBottom, boardBackground)
+
         val boardPaint = Paint()
-        boardPaint.color = Color.BLACK
+        boardPaint.color = Color.GRAY
 
         canvas?.drawLine(boardLeft, boardTop, boardLeft, boardBottom, boardPaint)
         canvas?.drawLine(boardLeft, boardTop, boardRight, boardTop, boardPaint)
         canvas?.drawLine(boardLeft, boardBottom, boardRight, boardBottom, boardPaint)
         canvas?.drawLine(boardRight, boardTop, boardRight, boardBottom, boardPaint)
+
+
     }
 
     fun drawApple(canvas: Canvas?) {
             val applePaint = Paint()
-            applePaint.color = Color.GREEN
+            applePaint.color = Color.rgb(255,234,0)
 
             for(i in 0..appleList.size-1) {
                 canvas?.drawRect(getPointRectangle(appleList.get(i)), applePaint)
@@ -261,7 +269,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun drawSnake(canvas: Canvas?) {
         val snakePaint = Paint()
-        snakePaint.color = Color.BLUE
+        snakePaint.color = SettingsActivity.snakeColor
 
         for(point: Point in snake) {
             canvas?.drawRect(getPointRectangle(point), snakePaint)
