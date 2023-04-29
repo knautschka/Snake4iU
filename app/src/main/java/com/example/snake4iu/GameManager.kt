@@ -287,13 +287,15 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         val textPaint = Paint()
         textPaint.color = Color.BLACK
-        textPaint.textSize = 40F
+        val textSize = 12
+        val textSizeRelative = textSize * resources.displayMetrics.scaledDensity
+        textPaint.textSize = textSizeRelative
         textPaint.isAntiAlias = true
         textPaint.style = Paint.Style.FILL
 
         for(i in 0..appleList.size-1) {
             canvas?.drawText((i+1).toString(),
-                getPointRectangle(appleList.get(i)).centerX().toFloat() -10F, getPointRectangle(appleList.get(i)).centerY().toFloat()+10F, textPaint)
+                getPointRectangle(appleList.get(i)).centerX().toFloat() -5F, getPointRectangle(appleList.get(i)).centerY().toFloat()+5F, textPaint)
         }
 
     }
