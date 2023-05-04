@@ -19,46 +19,192 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
         >
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/button_links"
-            android:onClick="onLeft"
-            android:layout_gravity="center"/>
 
+        <!-- PunkteAnzeige + Gesamtes Steuerelement -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:src="@drawable/button_oben"
-                android:layout_margin="20dp"
-                android:onClick="onUp"/>
 
-            <ImageView
+            <!--  PunkteAnzeige -->
+            <TextView
+                android:id="@+id/scorePoints"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:src="@drawable/button_unten"
-                android:onClick="onDown"/>
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:gravity="left"
+                android:text="Punkte: 200"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:elevation="5dp"/>
 
+            <!--Beginn Steuerelemente-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:id="@+id/Layout_ButtonLeft"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        />
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:onClick="onLeft"
+                        app:srcCompat="@drawable/links" />
+                    />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Layout_ButtonTopAndMiddle"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:onClick="onUp"
+                        app:srcCompat="@drawable/oben" />
+
+                    />
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/mitte" />
+                    />
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:onClick="onDown"
+                        app:srcCompat="@drawable/unten" />
+                    />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Layout_ButtonRight"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        />
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:onClick="onRight"
+                        app:srcCompat="@drawable/rechts" />
+                    />
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        />
+
+                </LinearLayout>
+                <!--Steuerkreuz ende-->
+
+
+                <!-- Turbo Button anfang-->
+                <LinearLayout
+                    android:id="@+id/Layout_Buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+
+
+                    <LinearLayout
+                        android:id="@+id/Layout_ButtonB"
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp" />
+
+                        <ImageButton
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:background="@color/white"
+                            android:onClick="onRight"
+                            app:srcCompat="@drawable/tbuttonwa" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:id="@+id/Layout_ButtonA"
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:background="@color/white"
+                            android:onClick="onRight"
+                            app:srcCompat="@drawable/tbuttonwb" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <!-- Turbo Button Ende-->
+                </LinearLayout>
+                <!-- Turbo Button ende-->
+            </LinearLayout>
         </LinearLayout>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/button_rechts"
-            android:onClick="onRight"/>
     </LinearLayout>
 
     <TextView
@@ -82,6 +228,5 @@
         android:gravity="center"
         android:text="Game Over\ntippen für Neustart"
         android:onClick="onGameStart"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
