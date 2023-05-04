@@ -18,8 +18,7 @@ public class TitleScreenActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (MotionEventCompat.getActionMasked(event)) {
-
-            // Display a Toast whenever a movement is captured on the screen
+            
             case MotionEvent.ACTION_MOVE:
                 Intent intent = new Intent(this, MainActivity.class);
 
