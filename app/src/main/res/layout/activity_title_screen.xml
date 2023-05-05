@@ -41,7 +41,8 @@
                 android:paddingTop="20dp"
                 android:paddingRight="10dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ship" />
+                app:srcCompat="@drawable/ship"
+                android:onClick="onClickTitle"/>
 
             <ImageView
                 android:id="@+id/island"
@@ -50,7 +51,8 @@
                 android:layout_alignParentBottom="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/insel1" />
+                app:srcCompat="@drawable/insel1"
+                android:onClick="onClickTitle"/>
 
         </RelativeLayout>
 
