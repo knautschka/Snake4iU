@@ -1,11 +1,13 @@
 package com.example.snake4iu;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MotionEventCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 public class TitleScreenActivity extends AppCompatActivity {
 
@@ -13,19 +15,14 @@ public class TitleScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen);
+
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (MotionEventCompat.getActionMasked(event)) {
-            
-            case MotionEvent.ACTION_MOVE:
-                Intent intent = new Intent(this, MainActivity.class);
-
+    public void onClickTitle(View button) {
+        Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                return true;
-            default:
-                return super.onTouchEvent(event);
         }
-    }
+
+
+
 }
