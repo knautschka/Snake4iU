@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.util.Random
+import java.util.logging.Handler
 
 class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(context, attributeSet), SurfaceHolder.Callback {
 
@@ -31,8 +32,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var level = 1
 
     private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
-    private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
-    private val mpDie = MediaPlayer.create(context, R.raw.snake_die)
+    private val handler = android.os.Handler()
+    private val mpApple = MediaPlayer.create(context, R.raw.snake_point1)
+    private val mpDie = MediaPlayer.create(context, R.raw.snake_die2)
 
     init {
         holder.addCallback(this)
@@ -174,6 +176,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     fun updateLevel() {
         level ++
         (context as SnakeActivity).updateLevel(level)
+        handler.postDelayed({
+            mpStart.start()
+        }, 300)
     }
 
     fun checkCollision(): Boolean {

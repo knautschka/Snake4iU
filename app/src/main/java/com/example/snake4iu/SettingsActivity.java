@@ -1,14 +1,16 @@
 package com.example.snake4iu;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
-
+    private MediaPlayer mediaPlayer;
     public static float speed = 1;
     public static int snakeColor = Color.rgb(255,165,0);
 
