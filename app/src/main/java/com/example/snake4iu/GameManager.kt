@@ -19,6 +19,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var w = Resources.getSystem().displayMetrics.widthPixels
     private var h = Resources.getSystem().displayMetrics.heightPixels
     private lateinit var apple:Point
+    private lateinit var item:Point
     private val appleList = arrayListOf<Point>()
 
     private val snake = arrayListOf<Point>()
@@ -62,6 +63,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             updatedDirection = Direction.LEFT
         }
         generateNewApple()
+        generateNewItem()
         mpStart.start()
     }
 
@@ -94,6 +96,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
     }
 
+    fun generateNewItem() {
+        item = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+    }
+
     fun move(direction: Direction) {
         if(!(movingDirection == Direction.UP && direction == Direction.DOWN) &&
                 !(movingDirection == Direction.DOWN && direction == Direction.UP) &&
@@ -120,6 +126,12 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked) {
                 gameOver = true
                 break
+            }
+        }
+
+        if(snake[0].x == item.x && snake[0].y == item.y) {
+            if(snake.size > 1) {
+                snake.remove(snake.get(snake.size-1))
             }
         }
 
@@ -257,6 +269,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         drawBoard(canvas)
         drawApple(canvas)
         drawNumbers(canvas)
+        drawItem(canvas)
         drawSnake(canvas)
 
     }
@@ -292,6 +305,13 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 canvas?.drawRect(getPointRectangle(appleList.get(i)), applePaint)
             }
 
+    }
+
+    fun drawItem(canvas: Canvas?) {
+        val itemPaint = Paint()
+        itemPaint.color = Color.RED
+
+        canvas?.drawRect(getPointRectangle(item), itemPaint)
     }
 
     fun drawNumbers(canvas: Canvas?) {
