@@ -1,6 +1,7 @@
 package com.example.snake4iu
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -65,9 +66,10 @@ class SnakeActivity : AppCompatActivity() {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if(vibrator.hasVibrator()) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+                //Bei 20 zuckt er auf dem A310F
+                vibrator.vibrate(VibrationEffect.createOneShot(23, VibrationEffect.EFFECT_CLICK))
             } else {
-                vibrator.vibrate(100)
+                vibrator.vibrate(23)
             }
         }
     }
