@@ -29,6 +29,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var gameOver = false;
     private var appleSnacked = 0
     private var level = 1
+    private var scorePoints = 0
 
     private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
     private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
@@ -49,6 +50,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         snake.clear()
         appleList.clear()
         level = 1
+        scorePoints = 0
         appleSnacked = 0
         val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
         snake.add(initialPoint)
@@ -104,12 +106,14 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     fun update() {
 
         (context as SnakeActivity).updateLevel(level)
+        (context as SnakeActivity).updatePoints(scorePoints)
 
         for(i in 0..appleList.size-1) {
             if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
                 appleList.get(i).x = 1000
                 appleList.get(i).y = 1000
                 appleSnacked ++
+                updateScorePoints()
                 mpApple.start()
             }
 
@@ -176,6 +180,11 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     fun updateLevel() {
         level ++
         (context as SnakeActivity).updateLevel(level)
+    }
+
+    fun updateScorePoints() {
+        scorePoints += (10 * level)
+        (context as SnakeActivity).updatePoints(scorePoints)
     }
 
     fun checkCollision(): Boolean {
