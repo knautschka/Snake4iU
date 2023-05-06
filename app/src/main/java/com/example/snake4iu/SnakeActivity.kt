@@ -44,7 +44,7 @@ class SnakeActivity : AppCompatActivity() {
     }
 
     fun onGameStart(v: View) {
-        score.text = "0"
+        score.text = "Level 1"
         gameOver.visibility = View.GONE
         gameManager.initGame()
     }

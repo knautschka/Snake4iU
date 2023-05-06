@@ -106,6 +106,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun update() {
 
+        (context as SnakeActivity).updateLevel(level)
+
         for(i in 0..appleList.size-1) {
             if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
                 appleList.get(i).x = 1000
