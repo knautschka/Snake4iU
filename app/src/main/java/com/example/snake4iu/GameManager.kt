@@ -109,7 +109,6 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
                 appleList.get(i).x = 1000
                 appleList.get(i).y = 1000
-                gameEngine.increaseSpeed()
                 appleSnacked ++
                 mpApple.start()
             }
