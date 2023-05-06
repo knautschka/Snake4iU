@@ -45,6 +45,7 @@ class SnakeActivity : AppCompatActivity() {
 
     fun onGameStart(v: View) {
         score.text = "Level 1"
+        scorePoints.text = "Punkte: 0"
         gameOver.visibility = View.GONE
         gameManager.initGame()
     }
@@ -58,6 +59,12 @@ class SnakeActivity : AppCompatActivity() {
     fun updateLevel(newLevel: Int) {
         runOnUiThread() {
             score.text = "Level " + newLevel.toString()
+        }
+    }
+
+    fun updatePoints(newPoints: Int) {
+        runOnUiThread() {
+            scorePoints.text = "Punkte: " + newPoints.toString()
         }
     }
 
