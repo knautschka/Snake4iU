@@ -33,6 +33,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
     private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
     private val mpDie = MediaPlayer.create(context, R.raw.snake_die)
+    private var gameOverSoundPlayed = false;
 
     init {
         holder.addCallback(this)
@@ -44,6 +45,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     fun initGame() {
         gameEngine.reset()
         gameOver = false
+        gameOverSoundPlayed = false;
         snake.clear()
         appleList.clear()
         level = 1
@@ -125,7 +127,11 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         if(gameOver) {
             (context as SnakeActivity).gameOver()
-            mpDie.start()
+            if(!gameOverSoundPlayed) {
+                mpDie.start()
+                gameOverSoundPlayed = true
+            }
+
         }
 
         if(appleSnacked == appleList.size) {
