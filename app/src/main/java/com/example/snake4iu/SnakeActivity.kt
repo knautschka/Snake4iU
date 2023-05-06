@@ -65,9 +65,9 @@ class SnakeActivity : AppCompatActivity() {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if(vibrator.hasVibrator()) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+                vibrator.vibrate(VibrationEffect.createOneShot(23, VibrationEffect.EFFECT_CLICK))
             } else {
-                vibrator.vibrate(100)
+                vibrator.vibrate(23)
             }
         }
     }
