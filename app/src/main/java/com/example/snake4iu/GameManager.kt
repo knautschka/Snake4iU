@@ -254,8 +254,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         canvas?.drawRGB(255,255,255)
         val boardLeft = w * 0.05f
         val boardRight = w * 0.95f
-        val boardTop = h * 0.1f
-        val boardBottom = h * 0.1f + boardSize * pointSize
+        val boardTop = h * 0.02f
+        val boardBottom = h * 0.02f + boardSize * pointSize
 
         val boardBackground = Paint()
         boardBackground.color = Color.rgb(0,188,212)
@@ -313,7 +313,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     fun getPointRectangle(point: Point): Rect {
         val left = (w * 0.05f + point.x * pointSize).toInt()
         val right = (left + pointSize).toInt()
-        val top = (h * 0.1f + point.y * pointSize).toInt()
+        val top = (h * 0.02f + point.y * pointSize).toInt()
         val bottom = (top + pointSize).toInt()
         return Rect(left, top, right, bottom)
     }
