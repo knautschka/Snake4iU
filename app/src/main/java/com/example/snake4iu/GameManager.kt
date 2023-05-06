@@ -71,17 +71,12 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             valid = true
             for(i in 0..level-1) {
                 apple = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
-                appleList.add(apple)
-            }
 
-            for(i in 0..level-1) {
-                for(j in i+1..level-1) {
-                    if(appleList.get(i).x == appleList.get(j).x && appleList.get(i).y == appleList.get(j).y) {
-                        appleList.clear()
-                        valid = false
-                        break
-                    }
+                while(appleList.contains(apple)) {
+                    apple = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
                 }
+
+                appleList.add(apple)
             }
 
             for(snakePoint: Point in snake) {
