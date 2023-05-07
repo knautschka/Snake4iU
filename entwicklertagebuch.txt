@@ -1,0 +1,73 @@
+7a20535	Tim	Sat May 6 18:45:11 2023 +0200	ItemTest
+93d77fd	Tim	Sat May 6 18:23:21 2023 +0200	Merge pull request #33 from knautschka/PunkteAnzeige
+5793a18	Tim	Sat May 6 18:23:06 2023 +0200	Punkteanzeige hinzugefügt
+039da3f	Tim	Sat May 6 18:06:57 2023 +0200	Merge pull request #32 from knautschka/SchlangeWirdSchnellerFix
+fc75580	Tim	Sat May 6 18:06:32 2023 +0200	Schlange wird jetzt nicht mehr schneller
+2400549	Tim	Sat May 6 18:03:22 2023 +0200	Merge pull request #31 from knautschka/GameBleibtHaengenBeiLetzterInselFix
+5d18443	Tim	Sat May 6 18:03:01 2023 +0200	Check für Inselpositionen geändert
+3fa2524	Tim	Sat May 6 17:17:26 2023 +0200	Merge pull request #30 from knautschka/GameOverSoundDauerschleifeFix
+aeeb61b	Tim	Sat May 6 17:17:06 2023 +0200	GameOver-Sound läuft nicht mehr in Dauerschleife
+2661ad7	Tim	Sat May 6 17:09:56 2023 +0200	Merge pull request #29 from knautschka/LevelCounterBigFix
+c74f0ff	Tim	Sat May 6 17:09:19 2023 +0200	Levelanzeige gefixt
+61172f4	Tim	Sat May 6 16:23:18 2023 +0200	Merge pull request #28 from knautschka/NeueVibrationAenderungPhil
+f36179d	Tim	Sat May 6 16:22:57 2023 +0200	Vibration angepasst
+cd719c5	Tim	Sat May 6 16:16:40 2023 +0200	Merge pull request #27 from knautschka/neuesThmePhil
+7a4b4ae	Tim	Sat May 6 16:16:23 2023 +0200	Neues Theme
+d0fefec	Tim	Sat May 6 15:49:39 2023 +0200	Merge pull request #26 from knautschka/SteuerkreuzOptimiertPhilsAenderungen
+9c5abd4	Tim	Sat May 6 15:49:14 2023 +0200	Steuerkreuz und Spielfeld angepasst
+bcb0123	Tim	Thu May 4 20:02:52 2023 +0200	Überflüssigen Kommentar entfernt
+0caa1fa	Tim	Thu May 4 20:01:35 2023 +0200	Merge pull request #21 from knautschka/NeuerTitleScreen
+54c9c7a	Tim	Thu May 4 20:01:07 2023 +0200	Neuer TitleSceen eingefügt
+693d85f	Tim	Thu May 4 19:41:03 2023 +0200	Merge pull request #20 from knautschka/NeuesSteuerkreuzUebernahmeVonPhil
+7aafc22	Tim	Thu May 4 19:40:36 2023 +0200	Steuerkreuz und neue Buttons eingefügt
+7dc5b99	Tim	Sat Apr 29 23:55:39 2023 +0200	Textgröße der Inseln ist jetzt dynamisch
+84832bd	Tim	Sat Apr 29 23:22:39 2023 +0200	Merge pull request #18 from knautschka/SchnellerRichtungswechsellNichtMoeglichFix
+5a22dfc	Tim	Sat Apr 29 23:22:18 2023 +0200	Userinput wird schneller verarbeitet
+2aa45d8	Tim	Sat Apr 29 22:55:01 2023 +0200	Merge pull request #17 from knautschka/PunkteKoennenInFalscherReihenfolgeUeberfahrenWerdenFix
+962221d	Tim	Sat Apr 29 22:54:44 2023 +0200	GameOver, wenn falsche Inseln eingesammelt
+d7225d3	Tim	Sat Apr 29 22:45:34 2023 +0200	Merge pull request #16 from knautschka/MehrereInselnAufSelberPositionFix
+febbf5f	Tim	Sat Apr 29 22:45:06 2023 +0200	Inseln sind nicht mehr auf derselben Position
+13df90c	Tim	Sat Apr 29 22:26:34 2023 +0200	Merge pull request #15 from knautschka/GameOverWennInselAmRandFix
+fe13fe3	Tim	Sat Apr 29 22:26:16 2023 +0200	Level ist gewonnen, auch wenn letzte Insel am Spielfeldrand ist
+bb5ea07	Tim	Sat Apr 29 22:20:37 2023 +0200	Merge pull request #14 from knautschka/BewegungsRichtungNachNeuemLevelFix
+e10617e	Tim	Sat Apr 29 22:20:17 2023 +0200	Bewegungsrichtung ab Level 2 angepasst
+a8a7b15	Tim	Sat Apr 29 22:14:19 2023 +0200	Merge pull request #13 from knautschka/SchlangeStartetAusserhalbDesSpielfeldes
+841f06d	Tim	Sat Apr 29 22:11:04 2023 +0200	Schlange startet nicht mehr außerhalb des Spielfelds
+54832f2	Tim	Sat Apr 29 21:47:26 2023 +0200	Merge pull request #12 from knautschka/SchlangeGehtDurchStartpunktBug
+eac884a	Tim	Sat Apr 29 21:46:54 2023 +0200	GameOver bei Startpunkt-Berührung
+f52f937	Tim	Sat Apr 29 21:01:20 2023 +0200	Merge pull request #11 from knautschka/BenachrichtigungBeiAbwesenheit
+98226da	Tim	Sat Apr 29 21:01:07 2023 +0200	Merge branch 'main' into BenachrichtigungBeiAbwesenheit
+7b5d77a	Tim	Sat Apr 29 20:56:30 2023 +0200	Nachricht bei Abwesenheit durch AlarmManager
+2007252	Tim	Fri Apr 28 15:32:36 2023 +0200	AlarmManager
+cc727be	Tim	Thu Apr 27 00:18:07 2023 +0200	Lauffähig auf Android 13
+71e763a	Tim	Tue Apr 25 18:54:23 2023 +0200	Merge pull request #8 from knautschka/Credits
+bef34fd	Tim	Tue Apr 25 18:54:01 2023 +0200	Credits hinzugefügt
+94e7af3	Tim	Tue Apr 25 17:59:24 2023 +0200	NotificationChannel angepasst
+f79eecc	Tim	Tue Apr 25 17:04:41 2023 +0200	Merge pull request #7 from knautschka/FarbenVariierenJeNachSchwierigkeitsgrad
+da77834	Tim	Tue Apr 25 17:03:59 2023 +0200	Die Farbe der Schlange variiert je nach Schwierigkeitsgrad
+0adfa70	Tim	Mon Apr 24 21:20:40 2023 +0200	Merge pull request #6 from knautschka/Schwierigkeitsgrade
+9a13f7e	Tim	Mon Apr 24 21:19:52 2023 +0200	Schwierigkeitsgrad einstellbar
+0fc8b4c	Tim	Mon Apr 24 20:00:58 2023 +0200	Merge pull request #5 from knautschka/SchlangeKonstantLaenger
+cb48471	Tim	Mon Apr 24 20:00:36 2023 +0200	Schlange wird nun konstant länger
+3d7e092	Tim	Mon Apr 24 19:24:55 2023 +0200	Merge pull request #4 from knautschka/E-Mail-Intent
+bf91a83	Tim	Mon Apr 24 15:59:13 2023 +0200	Mail-Intent für Weiterempfehlung
+d866c39	Tim	Mon Apr 24 15:27:25 2023 +0200	Notification bei Abwesenheit + Lauffähigkeit ab Android 12
+e1e2801	Tim	Tue Apr 18 18:43:19 2023 +0200	Merge pull request #3 from knautschka/VerbindeDieInseln
+d1080ad	Tim	Tue Apr 18 16:40:36 2023 +0200	Verbinde-die-Insel-Regeln komplett umgesetzt
+54e5b83	Tim	Tue Apr 18 14:51:55 2023 +0200	Weitere Verbinde-die-Insel-Regeln
+e8c86ed	Tim	Mon Apr 17 23:29:18 2023 +0200	Version 0.1
+432d419	Tim	Mon Apr 17 01:46:26 2023 +0200	Anfängliche Spielregeln implementiert
+37e4892	Tim	Sat Apr 15 21:29:15 2023 +0200	Merge pull request #2 from knautschka/SnakeBeginning
+0aea112	Tim	Sat Apr 15 21:25:44 2023 +0200	Buttons und Punkte
+dce6468	Tim	Sat Apr 15 20:55:41 2023 +0200	Sound eingefügt.
+8e60b19	Tim	Sat Apr 15 20:45:19 2023 +0200	Kleines Bugfixing
+050374a	Tim	Sat Apr 15 20:41:36 2023 +0200	Komplett spielbar
+a0d0029	Tim	Sat Apr 15 20:06:44 2023 +0200	Doppelte SnakeActivity entfernt.
+867b478	Tim	Sat Apr 15 20:04:37 2023 +0200	Merge branch 'SnakeBeginning' of https://github.com/knautschka/Snake4iU into SnakeBeginning
+0ad23a4	Tim	Sat Apr 15 20:02:22 2023 +0200	Anfängliche Spielmöglichkeiten
+c964276	Tim	Sun Mar 19 01:51:16 2023 +0100	UI für Snake begonnen.
+355c38f	Tim	Sun Mar 19 01:51:16 2023 +0100	UI für Snake begonnen.
+54d8fb4	Tim	Sun Mar 19 01:07:09 2023 +0100	Merge pull request #1 from knautschka/hauptmenue
+47eeb32	Tim	Sun Mar 19 01:03:37 2023 +0100	Deutsch und Englisch sind jetzt als Sprachen verfügbar.
+a64f52e	Tim	Sun Mar 19 00:37:14 2023 +0100	MenüButtons eingefügt.
+6dc7b73	Tim	Wed Mar 1 18:58:59 2023 +0100	Initial commit

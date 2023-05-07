@@ -6,13 +6,20 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
+import android.provider.Settings
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import java.util.Random
+import android.widget.Toast
+import java.util.*
 
 class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(context, attributeSet), SurfaceHolder.Callback {
+
+    companion object {
+        var invertedControls = false
+    }
 
     private val boardSize = 20
     private var pointSize = 0f
@@ -27,7 +34,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var movingDirection = Direction.LEFT
     private var updatedDirection = Direction.LEFT
 
-    private var gameOver = false;
+    private var gameOver = false
     private var appleSnacked = 0
     private var level = 1
     private var scorePoints = 0
@@ -35,7 +42,12 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
     private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
     private val mpDie = MediaPlayer.create(context, R.raw.snake_die)
-    private var gameOverSoundPlayed = false;
+    private var gameOverSoundPlayed = false
+    private var itemSpawn = false
+    private var itemChosen = 0
+    private var bonusPoints = 1
+    private var godMode = false
+
 
     init {
         holder.addCallback(this)
@@ -47,7 +59,11 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     fun initGame() {
         gameEngine.reset()
         gameOver = false
-        gameOverSoundPlayed = false;
+        gameOverSoundPlayed = false
+        itemSpawn = false
+        invertedControls = false
+        godMode = false
+        chooseItem()
         snake.clear()
         appleList.clear()
         level = 1
@@ -98,6 +114,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun generateNewItem() {
         item = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+        while(snake.contains(item)) {
+           item = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+        }
     }
 
     fun move(direction: Direction) {
@@ -123,17 +142,22 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 mpApple.start()
             }
 
-            if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked) {
+            if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked && !godMode) {
                 gameOver = true
                 break
+            } else if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked && godMode) {
+                godModeRebirth()
             }
         }
 
-        if(snake[0].x == item.x && snake[0].y == item.y) {
-            if(snake.size > 1) {
-                snake.remove(snake.get(snake.size-1))
+        checkItemSpawn()
+
+        if(itemSpawn) {
+            if(snake[0].x == item.x && snake[0].y == item.y) {
+                activateItem()
             }
         }
+
 
         if(gameOver) {
             (context as SnakeActivity).gameOver()
@@ -176,17 +200,80 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 }
             }
 
-
-
             when (direction) {
+
                 Direction.LEFT -> snake[0].x--
                 Direction.RIGHT -> snake[0].x++
                 Direction.UP -> snake[0].y--
                 Direction.DOWN -> snake[0].y++
             }
 
+
+
             movingDirection = updatedDirection
         }
+    }
+
+    fun godModeRebirth() {
+        snake.clear()
+        val initialPointReborn = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
+        snake.add(initialPointReborn)
+        if(initialPointReborn.x < boardSize / 2) {
+            movingDirection = Direction.RIGHT
+            updatedDirection = Direction.RIGHT
+        } else {
+            movingDirection = Direction.LEFT
+            updatedDirection = Direction.LEFT
+        }
+    }
+    fun checkItemSpawn() {
+        if(!itemSpawn) {
+            var willSpawn = Random().nextInt(100)
+            if(willSpawn <= 25) {
+                chooseItem()
+                itemSpawn = true
+            }
+        }
+    }
+
+    fun chooseItem() {
+        itemChosen = Random().nextInt(6)
+    }
+    fun activateItem() {
+        itemSpawn = false
+        generateNewItem()
+        if(itemChosen == 0) {
+            if(snake.size > 1) {
+                for (i in 0..((snake.size -1) / 2))
+                    snake.remove(snake.get(snake.size-1))
+            }
+        }
+
+        if(itemChosen == 1) {
+            val red = Random().nextInt(256)
+            val green = Random().nextInt(256)
+            val blue = 0
+
+            SettingsActivity.snakeColor = Color.rgb(red, green, blue)
+        }
+
+        if(itemChosen == 2) {
+            bonusPoints = 2
+        }
+
+        if(itemChosen == 3) {
+
+            invertedControls = true
+        }
+
+        if(itemChosen == 4) {
+            gameEngine.increaseSpeed()
+        }
+
+        if(itemChosen == 5) {
+            godMode = true
+        }
+
     }
 
     fun updateLevel() {
@@ -195,7 +282,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun updateScorePoints() {
-        scorePoints += (10 * level)
+        scorePoints += (10 * level * bonusPoints)
         (context as SnakeActivity).updatePoints(scorePoints)
     }
 
@@ -203,52 +290,68 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         when(updatedDirection) {
 
             Direction.UP -> {
-                if(snake[0].y == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
+                if((snake[0].y == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && !godMode) {
                     gameOver = true
+                } else if((snake[0].y == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && godMode) {
+                    godModeRebirth()
                 } else {
                     for(i in 1 until snake.size -1) {
-                        if(snake[0].x == snake[i].x && snake[0].y -1 == snake[i].y) {
+                        if((snake[0].x == snake[i].x && snake[0].y -1 == snake[i].y) && !godMode) {
                             gameOver = true
                             break
+                        } else if((snake[0].x == snake[i].x && snake[0].y -1 == snake[i].y) && godMode) {
+                            godModeRebirth()
                         }
                     }
                 }
             }
 
             Direction.DOWN -> {
-                if(snake[0].y == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
+                if((snake[0].y == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && !godMode) {
                     gameOver = true
+                } else if((snake[0].y == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && godMode) {
+                    godModeRebirth()
                 } else {
                     for(i in 1 until snake.size -1) {
-                        if(snake[0].x == snake[i].x && snake[0].y + 1 == snake[i].y) {
+                        if((snake[0].x == snake[i].x && snake[0].y + 1 == snake[i].y) && !godMode) {
                             gameOver = true
                             break
+                        } else if((snake[0].x == snake[i].x && snake[0].y + 1 == snake[i].y) && godMode) {
+                            godModeRebirth()
                         }
                     }
                 }
             }
 
             Direction.LEFT -> {
-                if(snake[0].x == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
+                if((snake[0].x == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && !godMode) {
                     gameOver = true
+                } else if((snake[0].x == 0 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && godMode) {
+                    godModeRebirth()
                 } else {
                     for(i in 1 until snake.size -1) {
-                        if(snake[0].y == snake[i].y && snake[0].x - 1 == snake[i].x) {
+                        if((snake[0].y == snake[i].y && snake[0].x - 1 == snake[i].x) && !godMode) {
                             gameOver = true
                             break
+                        } else if(((snake[0].y == snake[i].y && snake[0].x - 1 == snake[i].x) && godMode)) {
+                            godModeRebirth()
                         }
                     }
                 }
             }
 
             Direction.RIGHT -> {
-                if(snake[0].x == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) {
+                if((snake[0].x == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && !godMode) {
                     gameOver = true
+                } else if((snake[0].x == boardSize -1 || (snake[0] == snake[snake.size-1] && snake.size > 1)) && godMode) {
+                    godModeRebirth()
                 } else {
                     for(i in 1 until snake.size -1) {
-                        if(snake[0].y == snake[i].y && snake[0].x + 1 == snake[i].x) {
+                        if((snake[0].y == snake[i].y && snake[0].x + 1 == snake[i].x) && !godMode) {
                             gameOver = true
                             break
+                        } else if((snake[0].y == snake[i].y && snake[0].x + 1 == snake[i].x) && godMode) {
+                            godModeRebirth()
                         }
                     }
                 }
@@ -269,7 +372,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         drawBoard(canvas)
         drawApple(canvas)
         drawNumbers(canvas)
-        drawItem(canvas)
+        if(itemSpawn) {
+            drawItem(canvas)
+        }
+
         drawSnake(canvas)
 
     }
@@ -308,10 +414,34 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun drawItem(canvas: Canvas?) {
-        val itemPaint = Paint()
-        itemPaint.color = Color.RED
 
-        canvas?.drawRect(getPointRectangle(item), itemPaint)
+        lateinit var itemPNG:Drawable
+
+        if(itemChosen == 0) {
+            itemPNG = resources.getDrawable(R.drawable.largersnake, null)
+        } else if(itemChosen == 1) {
+            itemPNG = resources.getDrawable(R.drawable.colorchange, null)
+        } else if(itemChosen == 2) {
+            itemPNG = resources.getDrawable(R.drawable.bonuspoints, null)
+        } else if(itemChosen == 3) {
+            itemPNG = resources.getDrawable(R.drawable.question, null)
+        } else if(itemChosen == 4) {
+            itemPNG = resources.getDrawable(R.drawable.speedup, null)
+        } else if(itemChosen == 5) {
+            itemPNG = resources.getDrawable(R.drawable.godmode)
+        } else {
+            itemPNG = resources.getDrawable(R.drawable.largersnake, null)
+        }
+
+
+        val left = (w * 0.05f + item.x * pointSize).toInt()
+        val right = (left + pointSize).toInt()
+        val top = (h * 0.02f + item.y * pointSize).toInt()
+        val bottom = (top + pointSize).toInt()
+        itemPNG?.setBounds(left, top, right, bottom)
+        if (canvas != null) {
+            itemPNG?.draw(canvas)
+        }
     }
 
     fun drawNumbers(canvas: Canvas?) {

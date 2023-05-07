@@ -15,7 +15,7 @@ class GameEngine(var surfaceHolder: SurfaceHolder?, val gameManager: GameManager
     }
 
     fun increaseSpeed() {
-        targetFPS += 0.1f
+        targetFPS += 2f
     }
 
     fun reset() {

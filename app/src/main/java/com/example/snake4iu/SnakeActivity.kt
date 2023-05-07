@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_snake.*
 
 class SnakeActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,23 +24,44 @@ class SnakeActivity : AppCompatActivity() {
 
     }
 
+
     fun onUp(v: View) {
-        gameManager.move(Direction.UP)
+        if(!GameManager.invertedControls) {
+            gameManager.move(Direction.UP)
+        } else {
+            gameManager.move(Direction.DOWN)
+        }
+
         vibrate()
     }
 
     fun onDown(v: View) {
-        gameManager.move(Direction.DOWN)
+        if(!GameManager.invertedControls) {
+            gameManager.move(Direction.DOWN)
+        } else {
+            gameManager.move(Direction.UP)
+        }
+
         vibrate()
     }
 
     fun onLeft(v: View) {
-        gameManager.move(Direction.LEFT)
+        if(!GameManager.invertedControls) {
+            gameManager.move(Direction.LEFT)
+        } else {
+            gameManager.move(Direction.RIGHT)
+        }
+
         vibrate()
     }
 
     fun onRight(v: View) {
-        gameManager.move(Direction.RIGHT)
+        if(!GameManager.invertedControls) {
+            gameManager.move(Direction.RIGHT)
+        } else {
+            gameManager.move(Direction.LEFT)
+        }
+
         vibrate()
     }
 
