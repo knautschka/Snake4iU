@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuInflater;
 import android.widget.TextView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 public class HighscoreActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = HighscoreActivity.class.getSimpleName();
@@ -33,6 +35,13 @@ public class HighscoreActivity extends AppCompatActivity {
     final String KEY = "savedPreferences";
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_contextual_action_bar, menu);
+
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
@@ -41,8 +50,64 @@ public class HighscoreActivity extends AppCompatActivity {
 
         activateAddButton();
 
-        initializeContextualActionBar();
+        final ListView listView = (ListView) findViewById(R.id.highscoreListView);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
+        listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+
+            private int numSelected = 0;
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.menu_contextual_action_bar, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.cab_delete:
+                        SparseBooleanArray selected = listView.getCheckedItemPositions();
+                        for (int i = selected.size() - 1; i >= 0; i--) {
+                            if (selected.valueAt(i)) {
+                                HighscoreMemo selectedItem = (HighscoreMemo) listView.getAdapter().getItem(selected.keyAt(i));
+                                // Remove selected item from database
+                                dataSource.deleteHighscoreMemo(selectedItem);
+                                ((ArrayAdapter) listView.getAdapter()).remove(selectedItem);
+                            }
+                        }
+                        showAllListEntries();
+                        numSelected = 0;
+                        mode.finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                numSelected = 0;
+            }
+
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                if (checked) {
+                    numSelected++;
+                } else {
+                    numSelected--;
+                }
+                mode.setTitle(numSelected + " selected");
+            }
+        });
+
+        //initializeContextualActionBar();
 
     }
 
@@ -98,6 +163,7 @@ public class HighscoreActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(usernameString)) {
                     editTextUsername.setError("Username-Feld darf nicht leer sein");
+                    return;
                 }
 
                 int scoredPoints = Integer.parseInt(scoredPointsString);
@@ -119,42 +185,45 @@ public class HighscoreActivity extends AppCompatActivity {
 
     private void initializeContextualActionBar() {
         final ListView highscoreMemosListView = (ListView) findViewById(R.id.highscoreListView);
-        highscoreMemosListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        highscoreMemosListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
 
         highscoreMemosListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+
             @Override
-            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
 
             }
 
             @Override
-            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-                getMenuInflater().inflate(R.menu.menu_contextual_action_bar, menu);
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                mode.getMenuInflater().inflate(R.menu.menu_contextual_action_bar, menu);
                 return true;
             }
 
             @Override
-            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 return false;
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-                switch(menuItem.getItemId()) {
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+
+                switch (item.getItemId()) {
 
                     case R.id.cab_delete:
-                        SparseBooleanArray touchedHighscoreMemosPositions = highscoreMemosListView.getCheckedItemPositions();
-                        for(int i = 0; i < touchedHighscoreMemosPositions.size(); i++) {
-                            boolean isChecked = touchedHighscoreMemosPositions.valueAt(i);
+                        SparseBooleanArray touchedShoppingMemosPositions = highscoreMemosListView.getCheckedItemPositions();
+                        for (int i=0; i < touchedShoppingMemosPositions.size(); i++) {
+                            boolean isChecked = touchedShoppingMemosPositions.valueAt(i);
                             if(isChecked) {
-                                int positionInListView = touchedHighscoreMemosPositions.keyAt(i);
-                                HighscoreMemo highscoreMemo = (HighscoreMemo) highscoreMemosListView.getItemAtPosition(positionInListView);
-                                Log.d(LOG_TAG, "Position in der ListView: " + positionInListView + " Inhalt: " + highscoreMemo.toString());
+                                int postitionInListView = touchedShoppingMemosPositions.keyAt(i);
+                                HighscoreMemo highscoreMemo = (HighscoreMemo) highscoreMemosListView.getItemAtPosition(postitionInListView);
+                                Log.d(LOG_TAG, "Position im ListView: " + postitionInListView + " Inhalt: " + highscoreMemo.toString());
                                 dataSource.deleteHighscoreMemo(highscoreMemo);
                             }
                         }
                         showAllListEntries();
-                        actionMode.finish();
+                        mode.finish();
                         return true;
 
                     default:
@@ -163,10 +232,11 @@ public class HighscoreActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onDestroyActionMode(ActionMode actionMode) {
+            public void onDestroyActionMode(ActionMode mode) {
 
             }
         });
+
     }
 
     private void showPoints() {
