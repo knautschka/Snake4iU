@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuInflater;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -34,12 +38,12 @@ public class HighscoreActivity extends AppCompatActivity {
     int scoredPoints;
     final String KEY = "savedPreferences";
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_contextual_action_bar, menu);
 
         return true;
-    }
+    } */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,63 +53,6 @@ public class HighscoreActivity extends AppCompatActivity {
         dataSource = new HighscoreMemoDataSource(this);
 
         activateAddButton();
-
-        final ListView listView = (ListView) findViewById(R.id.highscoreListView);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
-
-            private int numSelected = 0;
-
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                MenuInflater inflater = getMenuInflater();
-                inflater.inflate(R.menu.menu_contextual_action_bar, menu);
-                return true;
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                return false;
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.cab_delete:
-                        SparseBooleanArray selected = listView.getCheckedItemPositions();
-                        for (int i = selected.size() - 1; i >= 0; i--) {
-                            if (selected.valueAt(i)) {
-                                HighscoreMemo selectedItem = (HighscoreMemo) listView.getAdapter().getItem(selected.keyAt(i));
-                                // Remove selected item from database
-                                dataSource.deleteHighscoreMemo(selectedItem);
-                                ((ArrayAdapter) listView.getAdapter()).remove(selectedItem);
-                            }
-                        }
-                        showAllListEntries();
-                        numSelected = 0;
-                        mode.finish();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                numSelected = 0;
-            }
-
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                if (checked) {
-                    numSelected++;
-                } else {
-                    numSelected--;
-                }
-                mode.setTitle(numSelected + " selected");
-            }
-        });
 
         //initializeContextualActionBar();
 
@@ -133,13 +80,31 @@ public class HighscoreActivity extends AppCompatActivity {
     private void showAllListEntries() {
         List<HighscoreMemo> highscoreMemoList = dataSource.getAllHighscoreMemos();
 
+        Collections.sort(highscoreMemoList, new Comparator<HighscoreMemo>() {
+            @Override
+            public int compare(HighscoreMemo highscoreMemo, HighscoreMemo t1) {
+                HighscoreMemo p1 = (HighscoreMemo) highscoreMemo;
+                HighscoreMemo p2 = (HighscoreMemo) t1;
+
+                int i1 = highscoreMemo.getScoredPoints();
+                int i2 = t1.getScoredPoints();
+
+                String i1String = String.valueOf(i1);
+                String i2String = String.valueOf(i2);
+
+                return Integer.valueOf(t1.getScoredPoints()).compareTo(highscoreMemo.getScoredPoints());
+            }
+        });
+
         ArrayAdapter<HighscoreMemo> highscoreMemoArrayAdapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_list_item_multiple_choice,
+                android.R.layout.simple_list_item_1,
                 highscoreMemoList);
 
         ListView highscoreMemosListView = (ListView) findViewById(R.id.highscoreListView);
         highscoreMemosListView.setAdapter(highscoreMemoArrayAdapter);
+
+
     }
 
 
