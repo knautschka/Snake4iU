@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuInflater;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -14,11 +12,6 @@ import android.widget.ListView;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import android.util.SparseBooleanArray;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AbsListView;
 import android.view.inputmethod.InputMethodManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -31,19 +24,6 @@ public class HighscoreActivity extends AppCompatActivity {
     public static final String LOG_TAG = HighscoreActivity.class.getSimpleName();
 
     private HighscoreMemoDataSource dataSource;
-    TextView highscoreBoard;
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
-
-    int scoredPoints;
-    final String KEY = "savedPreferences";
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_contextual_action_bar, menu);
-
-        return true;
-    } */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +33,6 @@ public class HighscoreActivity extends AppCompatActivity {
         dataSource = new HighscoreMemoDataSource(this);
 
         activateAddButton();
-
-        //initializeContextualActionBar();
 
     }
 
@@ -83,15 +61,6 @@ public class HighscoreActivity extends AppCompatActivity {
         Collections.sort(highscoreMemoList, new Comparator<HighscoreMemo>() {
             @Override
             public int compare(HighscoreMemo highscoreMemo, HighscoreMemo t1) {
-                HighscoreMemo p1 = (HighscoreMemo) highscoreMemo;
-                HighscoreMemo p2 = (HighscoreMemo) t1;
-
-                int i1 = highscoreMemo.getScoredPoints();
-                int i2 = t1.getScoredPoints();
-
-                String i1String = String.valueOf(i1);
-                String i2String = String.valueOf(i2);
-
                 return Integer.valueOf(t1.getScoredPoints()).compareTo(highscoreMemo.getScoredPoints());
             }
         });
@@ -148,67 +117,4 @@ public class HighscoreActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeContextualActionBar() {
-        final ListView highscoreMemosListView = (ListView) findViewById(R.id.highscoreListView);
-        highscoreMemosListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-
-        highscoreMemosListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
-
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-
-            }
-
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                mode.getMenuInflater().inflate(R.menu.menu_contextual_action_bar, menu);
-                return true;
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                return false;
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-
-                switch (item.getItemId()) {
-
-                    case R.id.cab_delete:
-                        SparseBooleanArray touchedShoppingMemosPositions = highscoreMemosListView.getCheckedItemPositions();
-                        for (int i=0; i < touchedShoppingMemosPositions.size(); i++) {
-                            boolean isChecked = touchedShoppingMemosPositions.valueAt(i);
-                            if(isChecked) {
-                                int postitionInListView = touchedShoppingMemosPositions.keyAt(i);
-                                HighscoreMemo highscoreMemo = (HighscoreMemo) highscoreMemosListView.getItemAtPosition(postitionInListView);
-                                Log.d(LOG_TAG, "Position im ListView: " + postitionInListView + " Inhalt: " + highscoreMemo.toString());
-                                dataSource.deleteHighscoreMemo(highscoreMemo);
-                            }
-                        }
-                        showAllListEntries();
-                        mode.finish();
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-
-            }
-        });
-
-    }
-
-    private void showPoints() {
-        if(preferences.getInt(KEY, 0) < scoredPoints) {
-            highscoreBoard.setText("Aktueller Highscore: " + scoredPoints);
-
-            editor.putInt(KEY, scoredPoints);
-        }
-    }
 }
