@@ -8,6 +8,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
+import android.provider.MediaStore.Audio.Media
 import android.provider.Settings
 import android.util.AttributeSet
 import android.view.SurfaceHolder
@@ -39,9 +40,16 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var level = 1
     private var scorePoints = 0
 
-    private val mpStart = MediaPlayer.create(context, R.raw.snake_start)
-    private val mpApple = MediaPlayer.create(context, R.raw.snake_point)
-    private val mpDie = MediaPlayer.create(context, R.raw.snake_die)
+    private val mpStart = MediaPlayer.create(context, R.raw.startsm)
+    private val mpApple = MediaPlayer.create(context, R.raw.pointsm)
+    private val mpDie = MediaPlayer.create(context, R.raw.diesm)
+    private val levelUp = MediaPlayer.create(context, R.raw.levelupsm)
+    private val itemShorterSnakeSound = MediaPlayer.create(context, R.raw.itemsizesm)
+    private val itemColorChangeSound = MediaPlayer.create(context, R.raw.itemcolorsm)
+    private val itemBonusPointsSound = MediaPlayer.create(context, R.raw.itembonussm)
+    private val itemInvertedControlsSound = MediaPlayer.create(context, R.raw.itemquestionsm)
+    private val itemIncreaseSpeedSound = MediaPlayer.create(context, R.raw.itemspeedupsm)
+    private val itemGodModeSound = MediaPlayer.create(context, R.raw.itemgodesm)
     private var gameOverSoundPlayed = false
     private var itemSpawn = false
     private var itemChosen = 0
@@ -139,7 +147,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
                 appleList.get(i).y = 1000
                 appleSnacked ++
                 updateScorePoints()
-                mpApple.start()
+                if(appleSnacked != appleList.size) {
+                    mpApple.start()
+                }
+
             }
 
             if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked && !godMode) {
@@ -169,6 +180,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
 
         if(appleSnacked == appleList.size) {
+            levelUp.start()
             updateLevel()
             snake.clear()
             generateNewApple()
@@ -244,12 +256,15 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         generateNewItem()
         if(itemChosen == 0) {
             if(snake.size > 1) {
+                itemShorterSnakeSound.start()
                 for (i in 0..((snake.size -1) / 2))
                     snake.remove(snake.get(snake.size-1))
             }
         }
 
         if(itemChosen == 1) {
+            itemColorChangeSound.start()
+
             val red = Random().nextInt(256)
             val green = Random().nextInt(256)
             val blue = 0
@@ -258,19 +273,22 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
 
         if(itemChosen == 2) {
+            itemBonusPointsSound.start()
             bonusPoints = 2
         }
 
         if(itemChosen == 3) {
-
+            itemInvertedControlsSound.start()
             invertedControls = true
         }
 
         if(itemChosen == 4) {
+            itemIncreaseSpeedSound.start()
             gameEngine.increaseSpeed()
         }
 
         if(itemChosen == 5) {
+            itemGodModeSound.start()
             godMode = true
         }
 
