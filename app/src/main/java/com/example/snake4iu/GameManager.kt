@@ -56,6 +56,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var itemChosen = 0
     private var bonusPoints = 1
     private var godMode = false
+    private var speedButtonPressed = false
 
 
     init {
@@ -292,6 +293,17 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         if(itemChosen == 5) {
             itemGodModeSound.start()
             godMode = true
+        }
+
+    }
+
+    fun speedButton() {
+        if(!speedButtonPressed) {
+            gameEngine.increaseSpeed()
+            speedButtonPressed = true
+        } else {
+            gameEngine.decreaseSpeed()
+            speedButtonPressed = false
         }
 
     }
