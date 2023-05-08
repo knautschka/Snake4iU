@@ -57,6 +57,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var bonusPoints = 1
     private var godMode = false
     private var speedButtonPressed = false
+    private var newLevelWait = false
 
 
     init {
@@ -73,6 +74,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         itemSpawn = false
         invertedControls = false
         godMode = false
+        newLevelWait = false
         chooseItem()
         snake.clear()
         appleList.clear()
@@ -188,6 +190,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             snake.clear()
             generateNewApple()
             appleSnacked = 0
+            newLevelWait = true
+            (context as SnakeActivity).newLevel()
             val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
             snake.add(initialPoint)
             if(initialPoint.x < boardSize / 2) {
@@ -199,7 +203,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             }
         }
 
-        if(!gameOver && !checkCollision()) {
+        if(!gameOver && !checkCollision() && !newLevelWait) {
             val direction = updatedDirection
 
             val lastPoint = Point(snake[snake.size - 1].x, snake[snake.size - 1].y)
@@ -227,6 +231,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
             movingDirection = updatedDirection
         }
+    }
+
+    fun goOnWithLevel() {
+        newLevelWait = false
     }
 
     fun godModeRebirth() {

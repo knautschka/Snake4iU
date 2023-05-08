@@ -171,6 +171,7 @@
                             app:srcCompat="@drawable/tbuttonwb"
                             android:layout_gravity="right"
                             android:layout_marginRight="10dp"
+                            android:onClick="onButtonA"
                             />
 
                         <ImageButton
@@ -201,5 +202,16 @@
             android:text="Game Over\ntippen für Neustart"
             android:textSize="50sp"
             android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/newLevel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:text="Drücke A, dann geht es weiter!"
+        android:textSize="50sp"
+        android:visibility="gone" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
