@@ -1,7 +1,6 @@
 package com.example.snake4iu
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -68,6 +67,10 @@ class SnakeActivity : AppCompatActivity() {
         }
 
         vibrate()
+    }
+
+    fun onButtonB(v: View) {
+        gameManager.speedButton()
     }
 
     fun onGameStart(v: View) {

@@ -18,6 +18,10 @@ class GameEngine(var surfaceHolder: SurfaceHolder?, val gameManager: GameManager
         targetFPS += 2f
     }
 
+    fun decreaseSpeed() {
+        targetFPS -= 2f
+    }
+
     fun reset() {
         targetFPS = SettingsActivity.speed
     }
