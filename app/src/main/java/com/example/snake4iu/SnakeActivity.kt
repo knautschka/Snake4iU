@@ -73,6 +73,14 @@ class SnakeActivity : AppCompatActivity() {
         gameManager.speedButton()
     }
 
+    fun onButtonA(v: View) {
+        gameManager.goOnWithLevel()
+
+        runOnUiThread() {
+            newLevel.visibility = View.GONE
+        }
+    }
+
     fun onGameStart(v: View) {
         score.text = "Level 1"
         scorePoints.text = "Punkte: 0"
@@ -81,6 +89,11 @@ class SnakeActivity : AppCompatActivity() {
         highscoreSaved = false
     }
 
+    fun newLevel() {
+        runOnUiThread() {
+            newLevel.visibility = View.VISIBLE
+        }
+    }
     fun gameOver() {
 
         if(!highscoreSaved) {
