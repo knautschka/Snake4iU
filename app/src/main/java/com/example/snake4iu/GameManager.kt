@@ -74,6 +74,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         itemSpawn = false
         invertedControls = false
         godMode = false
+        speedButtonPressed = false
         newLevelWait = false
         chooseItem()
         snake.clear()
