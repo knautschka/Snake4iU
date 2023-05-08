@@ -1,6 +1,7 @@
 package com.example.snake4iu
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
@@ -171,6 +172,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
 
         if(gameOver) {
+
             (context as SnakeActivity).gameOver()
             if(!gameOverSoundPlayed) {
                 mpDie.start()
@@ -377,8 +379,12 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
 
         if(gameOver) {
+
             (context as SnakeActivity).gameOver()
-            mpDie.start()
+            if(!gameOverSoundPlayed) {
+                mpDie.start()
+                gameOverSoundPlayed = true
+            }
         }
 
         return gameOver

@@ -1,16 +1,21 @@
 package com.example.snake4iu
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.snake4iu.HighscoreActivity.LOG_TAG
 import kotlinx.android.synthetic.main.activity_snake.*
 
 class SnakeActivity : AppCompatActivity() {
 
+    var scoredPoints = 0
+    var highscoreSaved = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,9 +75,30 @@ class SnakeActivity : AppCompatActivity() {
         scorePoints.text = "Punkte: 0"
         gameOver.visibility = View.GONE
         gameManager.initGame()
+        highscoreSaved = false
     }
 
     fun gameOver() {
+
+        if(!highscoreSaved) {
+            var dataSource = HighscoreMemoDataSource(this)
+
+            Log.d(LOG_TAG, "Die Datenquelle wird geöffnet.")
+            dataSource.open()
+
+            val highscoreMemo = dataSource.createHighscoreMemo("Testuser", scoredPoints)
+            Log.d(LOG_TAG, "Es wurde der folgende Eintrag in die Datenbank geschrieben:")
+            Log.d(LOG_TAG, "ID: ${highscoreMemo.id}, Inhalt: $highscoreMemo")
+
+
+            Log.d(LOG_TAG, "Die Datenquelle wird geschlossen.")
+
+            dataSource.close()
+
+            highscoreSaved = true
+        }
+
+
         runOnUiThread() {
             gameOver.visibility = View.VISIBLE
         }
@@ -85,6 +111,7 @@ class SnakeActivity : AppCompatActivity() {
     }
 
     fun updatePoints(newPoints: Int) {
+        scoredPoints = newPoints
         runOnUiThread() {
             scorePoints.text = "Punkte: " + newPoints.toString()
         }
