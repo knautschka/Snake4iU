@@ -192,6 +192,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             generateNewApple()
             appleSnacked = 0
             newLevelWait = true
+            godMode = false
             (context as SnakeActivity).newLevel()
             val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
             snake.add(initialPoint)
