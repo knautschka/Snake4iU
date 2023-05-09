@@ -32,8 +32,6 @@ public class HighscoreActivity extends AppCompatActivity {
 
         dataSource = new HighscoreMemoDataSource(this);
 
-        activateAddButton();
-
     }
 
     @Override
@@ -77,44 +75,5 @@ public class HighscoreActivity extends AppCompatActivity {
     }
 
 
-    private void activateAddButton() {
-        Button buttonAddHighscoreEntry = (Button) findViewById(R.id.addEntry);
-        final EditText editTextScoredPoints = (EditText) findViewById(R.id.editTextPoints);
-        final EditText editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-
-        buttonAddHighscoreEntry.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                String scoredPointsString = editTextScoredPoints.getText().toString();
-                String usernameString = editTextUsername.getText().toString();
-
-                if(TextUtils.isEmpty(scoredPointsString)) {
-                    editTextScoredPoints.setError("Punktefeld darf nicht leer sein");
-                    return;
-                }
-
-                if(TextUtils.isEmpty(usernameString)) {
-                    editTextUsername.setError("Username-Feld darf nicht leer sein");
-                    return;
-                }
-
-                int scoredPoints = Integer.parseInt(scoredPointsString);
-                editTextScoredPoints.setText("");
-                editTextUsername.setText("");
-
-                dataSource.createHighscoreMemo(usernameString, scoredPoints);
-
-                InputMethodManager inputMethodManager;
-                inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                if(getCurrentFocus() != null) {
-                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                }
-
-                showAllListEntries();
-            }
-        });
-    }
 
 }
