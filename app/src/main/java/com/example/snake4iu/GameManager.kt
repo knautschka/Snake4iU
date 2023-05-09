@@ -58,6 +58,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var godMode = false
     private var speedButtonPressed = false
     private var newLevelWait = false
+    private var justStarted = true
 
 
     init {
@@ -75,7 +76,6 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         invertedControls = false
         godMode = false
         speedButtonPressed = false
-        newLevelWait = false
         bonusPoints = 1
         if(SettingsActivity.speed == 1f) {
             SettingsActivity.snakeColor = Color.rgb(255, 165, 0)
@@ -104,6 +104,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         generateNewApple()
         generateNewItem()
         mpStart.start()
+        newLevelWait = true
+        justStarted = true
     }
 
 
@@ -155,6 +157,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         (context as SnakeActivity).updateLevel(level)
         (context as SnakeActivity).updatePoints(scorePoints)
+
+        if(justStarted) {
+            (context as SnakeActivity).newLevel()
+        }
 
         for(i in 0..appleList.size-1) {
             if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
@@ -249,6 +255,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun goOnWithLevel() {
         newLevelWait = false
+        justStarted = false
     }
 
     fun godModeRebirth() {

@@ -7,6 +7,8 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import com.example.snake4iu.HighscoreActivity.LOG_TAG
 import kotlinx.android.synthetic.main.activity_snake.*
@@ -16,6 +18,7 @@ class SnakeActivity : AppCompatActivity() {
     var scoredPoints = 0
     var highscoreSaved = false
     var level = 1
+    var gameOver = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,17 +78,23 @@ class SnakeActivity : AppCompatActivity() {
     }
 
     fun onButtonA(v: View) {
-        gameManager.goOnWithLevel()
+        if(!gameOver) {
+            gameManager.goOnWithLevel()
+        } else {
+            onGameStart(v)
+        }
+
 
         runOnUiThread() {
-            newLevel.visibility = View.GONE
+            newLevel.visibility = GONE
         }
     }
 
     fun onGameStart(v: View) {
+        gameOver = false
         score.text = "Level 1"
         scorePoints.text = "Punkte: 0"
-        gameOver.visibility = View.GONE
+        gameOverTextView.visibility = GONE
         gameManager.initGame()
         highscoreSaved = false
     }
@@ -93,6 +102,7 @@ class SnakeActivity : AppCompatActivity() {
     fun newLevel() {
         runOnUiThread() {
             newLevel.visibility = View.VISIBLE
+            newLevel.text = "Drücke A zum losfahren!\n Aktuelles Level: $level"
         }
     }
     fun gameOver() {
@@ -115,11 +125,13 @@ class SnakeActivity : AppCompatActivity() {
             highscoreSaved = true
         }
 
+        gameOver = true
+
 
         runOnUiThread() {
-            gameOver.visibility = View.VISIBLE
-            gameOver.text =
-                "Game Over\n Erreichte Punkte: $scoredPoints\n Erreichtes Level: $level\ntippen für Neustart"
+            gameOverTextView.visibility = View.VISIBLE
+            gameOverTextView.text =
+                "Game Over\n Erreichte Punkte: $scoredPoints\n Erreichtes Level: $level\nA drücken für Neustart"
         }
     }
 
