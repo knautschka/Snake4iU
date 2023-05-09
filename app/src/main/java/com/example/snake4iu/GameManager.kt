@@ -200,6 +200,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             updateLevel()
             snake.clear()
             generateNewApple()
+            itemSpawn = false
             appleSnacked = 0
             newLevelWait = true
             godMode = false
