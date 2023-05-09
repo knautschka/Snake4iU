@@ -76,6 +76,15 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         godMode = false
         speedButtonPressed = false
         newLevelWait = false
+        if(SettingsActivity.speed == 1f) {
+            SettingsActivity.snakeColor = Color.rgb(255, 165, 0)
+        } else if(SettingsActivity.speed == 2f) {
+            SettingsActivity.snakeColor = Color.BLACK
+        } else if(SettingsActivity.speed == 3f) {
+            SettingsActivity.snakeColor = Color.RED
+        } else {
+            SettingsActivity.snakeColor = Color.rgb(255, 165, 0)
+        }
         chooseItem()
         snake.clear()
         appleList.clear()
