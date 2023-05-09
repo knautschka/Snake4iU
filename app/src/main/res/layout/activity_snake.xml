@@ -192,24 +192,24 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/gameOverTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:text="Game Over\ntippen für Neustart"
-            android:textSize="50sp"
-            android:visibility="gone" />
+    <TextView
+        android:id="@+id/gameOverTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        android:gravity="center_horizontal"
+        android:text="Game Over\ntippen für Neustart"
+        android:textSize="30sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/newLevel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="10dp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="Drücke A zum Losfahren!"
-        android:textSize="50sp"
+        android:textSize="30sp"
         android:visibility="gone" />
 
 
