@@ -15,6 +15,7 @@ class SnakeActivity : AppCompatActivity() {
 
     var scoredPoints = 0
     var highscoreSaved = false
+    var level = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,19 +118,22 @@ class SnakeActivity : AppCompatActivity() {
 
         runOnUiThread() {
             gameOver.visibility = View.VISIBLE
+            gameOver.text =
+                "Game Over\n Erreichte Punkte: $scoredPoints\n Erreichtes Level: $level\ntippen für Neustart"
         }
     }
 
     fun updateLevel(newLevel: Int) {
+        level = newLevel
         runOnUiThread() {
-            score.text = "Level " + newLevel.toString()
+            score.text = "Level $newLevel"
         }
     }
 
     fun updatePoints(newPoints: Int) {
         scoredPoints = newPoints
         runOnUiThread() {
-            scorePoints.text = "Punkte: " + newPoints.toString()
+            scorePoints.text = "Punkte: $newPoints"
         }
     }
 
