@@ -76,6 +76,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         godMode = false
         speedButtonPressed = false
         newLevelWait = false
+        bonusPoints = 1
         if(SettingsActivity.speed == 1f) {
             SettingsActivity.snakeColor = Color.rgb(255, 165, 0)
         } else if(SettingsActivity.speed == 2f) {
@@ -202,6 +203,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             appleSnacked = 0
             newLevelWait = true
             godMode = false
+            bonusPoints = 1
             (context as SnakeActivity).newLevel()
             val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
             snake.add(initialPoint)
