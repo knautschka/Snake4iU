@@ -193,12 +193,11 @@
 
 
         <TextView
-            android:id="@+id/gameOver"
+            android:id="@+id/gameOverTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="10dp"
             android:gravity="center"
-            android:onClick="onGameStart"
             android:text="Game Over\ntippen für Neustart"
             android:textSize="50sp"
             android:visibility="gone" />
@@ -209,7 +208,7 @@
         android:layout_height="match_parent"
         android:elevation="10dp"
         android:gravity="center"
-        android:text="Drücke A, dann geht es weiter!"
+        android:text="Drücke A zum Losfahren!"
         android:textSize="50sp"
         android:visibility="gone" />
 
