@@ -102,7 +102,7 @@ class SnakeActivity : AppCompatActivity() {
             Log.d(LOG_TAG, "Die Datenquelle wird geöffnet.")
             dataSource.open()
 
-            val highscoreMemo = dataSource.createHighscoreMemo("Testuser", scoredPoints)
+            val highscoreMemo = dataSource.createHighscoreMemo("Spieler 1", scoredPoints)
             Log.d(LOG_TAG, "Es wurde der folgende Eintrag in die Datenbank geschrieben:")
             Log.d(LOG_TAG, "ID: ${highscoreMemo.id}, Inhalt: $highscoreMemo")
 
