@@ -97,7 +97,7 @@ class SnakeActivity : AppCompatActivity() {
     }
     fun gameOver() {
 
-        if(!highscoreSaved) {
+        if(!highscoreSaved && scoredPoints > 0) {
             var dataSource = HighscoreMemoDataSource(this)
 
             Log.d(LOG_TAG, "Die Datenquelle wird geöffnet.")
