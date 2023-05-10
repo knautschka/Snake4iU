@@ -139,7 +139,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun generateNewItem() {
         item = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
-        while(snake.contains(item)) {
+        while(snake.contains(item) || appleList.contains(item)) {
            item = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
         }
     }
@@ -435,11 +435,12 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         super.draw(canvas)
 
         drawBoard(canvas)
-        drawApple(canvas)
-        drawNumbers(canvas)
         if(itemSpawn) {
             drawItem(canvas)
         }
+        drawApple(canvas)
+        drawNumbers(canvas)
+
 
         drawSnake(canvas)
 
