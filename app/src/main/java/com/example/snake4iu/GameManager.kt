@@ -471,16 +471,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun drawIsland(canvas: Canvas?) {
 
-        var islandPNG = resources.getDrawable(R.drawable.insel1, null)
-        var left = (w * 0.05f + island.x * pointSize).toInt()
-        var right = (left + pointSize).toInt()
-        var top = (h * 0.02f + island.y * pointSize).toInt()
-        var bottom = (top + pointSize).toInt()
-        islandPNG?.setBounds(left, top, right, bottom)
-
         for(i in 0..islandList.size-1) {
             if (canvas != null) {
-                var islandPNG = resources.getDrawable(R.drawable.insel1, null)
+                var islandPNG = resources.getDrawable(R.drawable.palm, null)
                 var left = (w * 0.05f + islandList.get(i).x * pointSize).toInt()
                 var right = (left + pointSize).toInt()
                 var top = (h * 0.02f + islandList.get(i).y * pointSize).toInt()
@@ -529,7 +522,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         val textPaint = Paint()
         textPaint.color = Color.BLACK
-        val textSize = 12
+        val textSize = 20
         val textSizeRelative = textSize * resources.displayMetrics.scaledDensity
         textPaint.textSize = textSizeRelative
         textPaint.isAntiAlias = true
@@ -537,7 +530,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         for(i in 0..islandList.size-1) {
             canvas?.drawText((i+1).toString(),
-                getPointRectangle(islandList.get(i)).centerX().toFloat() -5F, getPointRectangle(islandList.get(i)).centerY().toFloat()+5F, textPaint)
+                getPointRectangle(islandList.get(i)).centerX().toFloat() -10F, getPointRectangle(islandList.get(i)).centerY().toFloat()+10F, textPaint)
         }
 
     }
