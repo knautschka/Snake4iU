@@ -1,7 +1,6 @@
 package com.example.snake4iu
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
@@ -9,12 +8,9 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
-import android.provider.MediaStore.Audio.Media
-import android.provider.Settings
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.widget.Toast
 import java.util.*
 
 class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(context, attributeSet), SurfaceHolder.Callback {
@@ -27,9 +23,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var pointSize = 0f
     private var w = Resources.getSystem().displayMetrics.widthPixels
     private var h = Resources.getSystem().displayMetrics.heightPixels
-    private lateinit var apple:Point
+    private lateinit var island:Point
     private lateinit var item:Point
-    private val appleList = arrayListOf<Point>()
+    private val islandList = arrayListOf<Point>()
 
     private val snake = arrayListOf<Point>()
     private val gameEngine = GameEngine(holder, this)
@@ -37,12 +33,12 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     private var updatedDirection = Direction.LEFT
 
     private var gameOver = false
-    private var appleSnacked = 0
+    private var islandVisited = 0
     private var level = 1
     private var scorePoints = 0
 
     private val mpStart = MediaPlayer.create(context, R.raw.startsm)
-    private val mpApple = MediaPlayer.create(context, R.raw.pointsm)
+    private val mpIsland = MediaPlayer.create(context, R.raw.pointsm)
     private val mpDie = MediaPlayer.create(context, R.raw.diesm)
     private val levelUp = MediaPlayer.create(context, R.raw.levelupsm)
     private val itemShorterSnakeSound = MediaPlayer.create(context, R.raw.itemsizesm)
@@ -88,10 +84,10 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         }
         chooseItem()
         snake.clear()
-        appleList.clear()
+        islandList.clear()
         level = 1
         scorePoints = 0
-        appleSnacked = 0
+        islandVisited = 0
         val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
         snake.add(initialPoint)
         if(initialPoint.x < boardSize / 2) {
@@ -101,7 +97,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             movingDirection = Direction.LEFT
             updatedDirection = Direction.LEFT
         }
-        generateNewApple()
+        generateNewIsland()
         generateNewItem()
         mpStart.start()
         newLevelWait = true
@@ -109,25 +105,25 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
 
-    fun generateNewApple() {
+    fun generateNewIsland() {
         var valid = false
-        appleList.clear()
+        islandList.clear()
         while(!valid) {
             valid = true
             for(i in 0..level-1) {
-                apple = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+                island = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
 
-                while(appleList.contains(apple)) {
-                    apple = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
+                while(islandList.contains(island)) {
+                    island = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
                 }
 
-                appleList.add(apple)
+                islandList.add(island)
             }
 
             for(snakePoint: Point in snake) {
-                for(i in 0..appleList.size-1) {
-                    if(appleList.get(i).x.equals(snakePoint.x) && appleList.get(i).y.equals(snakePoint.y))  {
-                        appleList.clear()
+                for(i in 0..islandList.size-1) {
+                    if(islandList.get(i).x.equals(snakePoint.x) && islandList.get(i).y.equals(snakePoint.y))  {
+                        islandList.clear()
                         valid = false
                         break
                     }
@@ -139,7 +135,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     fun generateNewItem() {
         item = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
-        while(snake.contains(item)) {
+        while(snake.contains(item) || islandList.contains(item)) {
            item = Point(Random().nextInt(boardSize), Random().nextInt(boardSize))
         }
     }
@@ -162,22 +158,22 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
             (context as SnakeActivity).newLevel()
         }
 
-        for(i in 0..appleList.size-1) {
-            if (snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i == appleSnacked) {
-                appleList.get(i).x = 1000
-                appleList.get(i).y = 1000
-                appleSnacked ++
+        for(i in 0..islandList.size-1) {
+            if (snake[0].x == islandList.get(i).x && snake[0].y == islandList.get(i).y && i == islandVisited) {
+                islandList.get(i).x = 1000
+                islandList.get(i).y = 1000
+                islandVisited ++
                 updateScorePoints()
-                if(appleSnacked != appleList.size) {
-                    mpApple.start()
+                if(islandVisited != islandList.size) {
+                    mpIsland.start()
                 }
 
             }
 
-            if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked && !godMode) {
+            if(snake[0].x == islandList.get(i).x && snake[0].y == islandList.get(i).y && i != islandVisited && !godMode) {
                 gameOver = true
                 break
-            } else if(snake[0].x == appleList.get(i).x && snake[0].y == appleList.get(i).y && i != appleSnacked && godMode) {
+            } else if(snake[0].x == islandList.get(i).x && snake[0].y == islandList.get(i).y && i != islandVisited && godMode) {
                 godModeRebirth()
             }
         }
@@ -201,16 +197,20 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         }
 
-        if(appleSnacked == appleList.size) {
+        if(islandVisited == islandList.size) {
             levelUp.start()
             updateLevel()
             snake.clear()
-            generateNewApple()
+            generateNewIsland()
+            gameEngine.reset()
             itemSpawn = false
-            appleSnacked = 0
+            islandVisited = 0
             newLevelWait = true
             godMode = false
+            invertedControls = false
             bonusPoints = 1
+            speedButtonPressed = false
+            invertedControls = false
             (context as SnakeActivity).newLevel()
             val initialPoint = Point(Random().nextInt(boardSize - 1), Random().nextInt(boardSize - 1))
             snake.add(initialPoint)
@@ -435,11 +435,12 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         super.draw(canvas)
 
         drawBoard(canvas)
-        drawApple(canvas)
-        drawNumbers(canvas)
         if(itemSpawn) {
             drawItem(canvas)
         }
+        drawIsland(canvas)
+        drawNumbers(canvas)
+
 
         drawSnake(canvas)
 
@@ -468,13 +469,28 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
     }
 
-    fun drawApple(canvas: Canvas?) {
-            val applePaint = Paint()
-            applePaint.color = Color.rgb(255,234,0)
+    fun drawIsland(canvas: Canvas?) {
 
-            for(i in 0..appleList.size-1) {
-                canvas?.drawRect(getPointRectangle(appleList.get(i)), applePaint)
+        var islandPNG = resources.getDrawable(R.drawable.insel1, null)
+        var left = (w * 0.05f + island.x * pointSize).toInt()
+        var right = (left + pointSize).toInt()
+        var top = (h * 0.02f + island.y * pointSize).toInt()
+        var bottom = (top + pointSize).toInt()
+        islandPNG?.setBounds(left, top, right, bottom)
+
+        for(i in 0..islandList.size-1) {
+            if (canvas != null) {
+                var islandPNG = resources.getDrawable(R.drawable.insel1, null)
+                var left = (w * 0.05f + islandList.get(i).x * pointSize).toInt()
+                var right = (left + pointSize).toInt()
+                var top = (h * 0.02f + islandList.get(i).y * pointSize).toInt()
+                var bottom = (top + pointSize).toInt()
+                islandPNG?.setBounds(left, top, right, bottom)
+
+                islandPNG?.draw(canvas)
             }
+        }
+
 
     }
 
@@ -519,9 +535,9 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         textPaint.isAntiAlias = true
         textPaint.style = Paint.Style.FILL
 
-        for(i in 0..appleList.size-1) {
+        for(i in 0..islandList.size-1) {
             canvas?.drawText((i+1).toString(),
-                getPointRectangle(appleList.get(i)).centerX().toFloat() -5F, getPointRectangle(appleList.get(i)).centerY().toFloat()+5F, textPaint)
+                getPointRectangle(islandList.get(i)).centerX().toFloat() -5F, getPointRectangle(islandList.get(i)).centerY().toFloat()+5F, textPaint)
         }
 
     }
