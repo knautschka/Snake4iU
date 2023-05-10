@@ -469,12 +469,33 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun drawApple(canvas: Canvas?) {
-            val applePaint = Paint()
+           /* val applePaint = Paint()
             applePaint.color = Color.rgb(255,234,0)
 
             for(i in 0..appleList.size-1) {
                 canvas?.drawRect(getPointRectangle(appleList.get(i)), applePaint)
+            }*/
+
+        var islandPNG = resources.getDrawable(R.drawable.insel1, null)
+        var left = (w * 0.05f + apple.x * pointSize).toInt()
+        var right = (left + pointSize).toInt()
+        var top = (h * 0.02f + apple.y * pointSize).toInt()
+        var bottom = (top + pointSize).toInt()
+        islandPNG?.setBounds(left, top, right, bottom)
+
+        for(i in 0..appleList.size-1) {
+            if (canvas != null) {
+                var islandPNG = resources.getDrawable(R.drawable.insel1, null)
+                var left = (w * 0.05f + appleList.get(i).x * pointSize).toInt()
+                var right = (left + pointSize).toInt()
+                var top = (h * 0.02f + appleList.get(i).y * pointSize).toInt()
+                var bottom = (top + pointSize).toInt()
+                islandPNG?.setBounds(left, top, right, bottom)
+
+                islandPNG?.draw(canvas)
             }
+        }
+
 
     }
 
