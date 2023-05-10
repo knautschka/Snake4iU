@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             );
         }
 
-        Toast.makeText(this, "Alarm wurde gesetzt!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.alarmSet), Toast.LENGTH_LONG).show();
     }
 
     private void cancelAlarm() {
@@ -119,13 +119,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMail(View view) {
-        String[] to = {"example@example.com"};
+        String[] to = {getString(R.string.exampleMail)};
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setData(Uri.parse("mailto:"));
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_EMAIL, to);
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Weiterempfehlung");
-        intent.putExtra(Intent.EXTRA_TEXT, "Spiel doch mal Snake 4 (i)U!");
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.recommendation));
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.emailStandardContent));
 
         startActivity(intent);
         finish();

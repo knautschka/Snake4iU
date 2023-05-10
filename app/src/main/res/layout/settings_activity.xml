@@ -28,7 +28,7 @@
         android:layout_marginStart="54dp"
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="50dp"
-        android:text="Einstellungen"
+        android:text="@string/preferences"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,19 +49,19 @@
             android:id="@+id/radioButtonEasy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Easy" />
+            android:text="@string/easy" />
 
         <RadioButton
             android:id="@+id/radioButtonMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Medium" />
+            android:text="@string/medium" />
 
         <RadioButton
             android:id="@+id/radioButtonHard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hard" />
+            android:text="@string/hard" />
     </RadioGroup>
 
     <TextView
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:layout_marginBottom="9dp"
-        android:text="Schwierigkeitsgrad"
+        android:text="@string/schwierigkeitsgrad"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />

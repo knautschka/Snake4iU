@@ -509,7 +509,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         } else if(itemChosen == 4) {
             itemPNG = resources.getDrawable(R.drawable.speedup, null)
         } else if(itemChosen == 5) {
-            itemPNG = resources.getDrawable(R.drawable.godmode)
+            itemPNG = resources.getDrawable(R.drawable.godmode, null)
         } else {
             itemPNG = resources.getDrawable(R.drawable.largersnake, null)
         }

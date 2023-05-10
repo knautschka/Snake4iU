@@ -102,7 +102,7 @@ class SnakeActivity : AppCompatActivity() {
     fun newLevel() {
         runOnUiThread() {
             newLevel.visibility = View.VISIBLE
-            newLevel.text = "Drücke A zum losfahren!\n Aktuelles Level: $level"
+            newLevel.text = getString(R.string.pressAtToStart) + "\n" + getString(R.string.currentLevel) + " $level"
         }
     }
     fun gameOver() {
@@ -113,7 +113,7 @@ class SnakeActivity : AppCompatActivity() {
             Log.d(LOG_TAG, "Die Datenquelle wird geöffnet.")
             dataSource.open()
 
-            val highscoreMemo = dataSource.createHighscoreMemo("Spieler 1", scoredPoints)
+            val highscoreMemo = dataSource.createHighscoreMemo(getString(R.string.playerOne), scoredPoints)
             Log.d(LOG_TAG, "Es wurde der folgende Eintrag in die Datenbank geschrieben:")
             Log.d(LOG_TAG, "ID: ${highscoreMemo.id}, Inhalt: $highscoreMemo")
 
@@ -131,7 +131,7 @@ class SnakeActivity : AppCompatActivity() {
         runOnUiThread() {
             gameOverTextView.visibility = View.VISIBLE
             gameOverTextView.text =
-                "Game Over\n Erreichte Punkte: $scoredPoints\n Erreichtes Level: $level\nA drücken für Neustart"
+                getString(R.string.gameOver) + "\n" + getString(R.string.scoredPoints) + ": $scoredPoints\n" + getString(R.string.reachedLevel) + ": $level\n" + getString(R.string.pressAtoRestart)
         }
     }
 
@@ -145,7 +145,7 @@ class SnakeActivity : AppCompatActivity() {
     fun updatePoints(newPoints: Int) {
         scoredPoints = newPoints
         runOnUiThread() {
-            scorePoints.text = "Punkte: $newPoints"
+            scorePoints.text = getString(R.string.Punkte) + " $newPoints"
         }
     }
 
