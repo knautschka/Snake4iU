@@ -118,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void startAnleitung(View view) {
+        Intent intent = new Intent(this, AnleitungActivity.class);
+
+        startActivity(intent);
+    }
+
     public void sendMail(View view) {
         String[] to = {getString(R.string.exampleMail)};
         Intent intent = new Intent(Intent.ACTION_SEND);

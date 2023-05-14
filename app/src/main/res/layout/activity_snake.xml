@@ -4,6 +4,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/gameBoy"
+        android:backgroundTint="@color/gameBoy"
         tools:context=".SnakeActivity">
 
         <com.example.snake4iu.GameManager
@@ -21,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="1dp"
+            android:background="@color/gameBoy"
+            android:backgroundTint="@color/gameBoy"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent">
 
@@ -28,6 +32,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/gameBoy"
+                android:backgroundTint="@color/gameBoy"
                 android:orientation="vertical">
 
 
@@ -36,6 +42,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@color/gameBoy"
+                    android:backgroundTint="@color/gameBoy"
                     android:orientation="horizontal">
 
 
@@ -60,6 +68,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:text="Level: 1"
+                                android:textColor="@color/textColor"
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -162,12 +171,14 @@
                             android:layout_marginRight="3dp"
                             android:gravity="center_horizontal"
                             android:text="Punkte: 200"
+                            android:textColor="@color/textColor"
+                            android:textStyle="bold"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
                             android:layout_width="75dp"
                             android:layout_height="75dp"
-                            android:background="@color/white"
+                            android:background="@color/gameBoy"
                             app:srcCompat="@drawable/tbuttonwb"
                             android:layout_gravity="right"
                             android:layout_marginRight="10dp"
@@ -178,7 +189,7 @@
                             android:layout_width="75dp"
                             android:layout_height="75dp"
                             android:layout_marginTop="3dp"
-                            android:background="@color/white"
+                            android:background="@color/gameBoy"
                             app:srcCompat="@drawable/tbuttonwa"
                             android:layout_gravity="right"
                             android:layout_marginRight="10dp"

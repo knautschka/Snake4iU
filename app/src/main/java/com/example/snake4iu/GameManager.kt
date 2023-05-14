@@ -19,7 +19,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         var invertedControls = false
     }
 
-    private val boardSize = 20
+    private val boardSize = SettingsActivity.boardSize
     private var pointSize = 0f
     private var w = Resources.getSystem().displayMetrics.widthPixels
     private var h = Resources.getSystem().displayMetrics.heightPixels

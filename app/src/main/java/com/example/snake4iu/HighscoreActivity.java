@@ -12,6 +12,8 @@ import android.widget.ListView;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+
 import android.view.inputmethod.InputMethodManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,6 +31,12 @@ public class HighscoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
+
+        try {
+            Objects.requireNonNull(getSupportActionBar()).hide();
+        } catch (NullPointerException e) {
+            // Ignore the exception if getSupportActionBar() returns null
+        }
 
         dataSource = new HighscoreMemoDataSource(this);
 
