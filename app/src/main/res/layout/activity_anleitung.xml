@@ -53,7 +53,7 @@
                         android:layout_width="270dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Du hast eine Schatzkarte gefunden, die dich zu einem Piratenschatz führt. Auf der Jagd nach dem Piratenschatz musst du alle Schlüssel auf den Inseln einsammeln, um die Schatztruhe öffnen zu können und das Abenteuer erfolgreich zu bestehen.  "
+                        android:text="@string/du_hast_eine_schatzkarte_gefunden_die_dich_zu_einem_piratenschatz_f_hrt_auf_der_jagd_nach_dem_piratenschatz_musst_du_alle_schl_ssel_auf_den_inseln_einsammeln_um_die_schatztruhe_ffnen_zu_k_nnen_und_das_abenteuer_erfolgreich_zu_bestehen"
                         android:textColor="@color/textColor" />
                 </TableRow>
 
@@ -75,7 +75,7 @@
                         android:layout_width="264dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Auf der Schatzkarte siehst du die Inseln, die du dazu der Reihenfolge nach ansteuern musst. Aber natürlich ist der Schatz verflucht – um dem Fluch zu entgehen darfst du deinen zurückgelegten Weg nicht kreuzen."
+                        android:text="@string/auf_der_schatzkarte_siehst_du_die_inseln_die_du_dazu_der_reihenfolge_nach_ansteuern_musst_aber_nat_rlich_ist_der_schatz_verflucht_um_dem_fluch_zu_entgehen_darfst_du_deinen_zur_ckgelegten_weg_nicht_kreuzen"
                         android:textColor="@color/textColor" />
                 </TableRow>
 
@@ -99,7 +99,7 @@
                         android:layout_width="253dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Der Klabautermann hat unterwegs einige Sachen verloren, manche davon werden dir helfen das Abenteuer zu bestehen, andere erschweren deine Reise. Plane deinen Weg weise, setze die Segel und nenne den größten Piratenschatz dein Eigen."
+                        android:text="@string/der_klabautermann_hat_unterwegs_einige_sachen_verloren_manche_davon_werden_dir_helfen_das_abenteuer_zu_bestehen_andere_erschweren_deine_reise_plane_deinen_weg_weise_setze_die_segel_und_nenne_den_gr_ten_piratenschatz_dein_eigen"
                         android:textColor="@color/textColor" />
                 </TableRow>
 
@@ -112,7 +112,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="Steuerung"
+                android:text="@string/steuerung"
                 android:textColor="@color/textColor"
                 android:textSize="20sp" />
 
@@ -147,7 +147,7 @@
                             android:id="@+id/textView27"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Steuerung"
+                            android:text="@string/steuerung"
                             android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -157,7 +157,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Steuerung der Bewegungsrichtung"
+                            android:text="@string/steuerung_der_bewegungsrichtung"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 
@@ -196,7 +196,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Startet das Level"
+                            android:text="@string/startet_das_level"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 
@@ -233,7 +233,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Eröht die Geschwindigkeit"
+                            android:text="@string/er_ht_die_geschwindigkeit"
                             android:textColor="@color/textColor" />
 
                     </LinearLayout>
@@ -280,7 +280,7 @@
                             android:id="@+id/textView16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Bonuspunkte"
+                            android:text="@string/bonuspunkte"
                             android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -290,7 +290,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Verleiht Bonuspunkte"
+                            android:text="@string/verleiht_bonuspunkte"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 
@@ -317,7 +317,7 @@
                             android:id="@+id/textView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Farbwechsel"
+                            android:text="@string/farbwechsel"
                             android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -327,7 +327,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Ändert die Farbe der Schlange"
+                            android:text="@string/ndert_die_farbe_der_schlange"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 
@@ -365,7 +365,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Sammelt man dies ein, kann man innerhalb eines Levels nicht mehr GameOver gehen."
+                            android:text="@string/sammelt_man_dies_ein_kann_man_innerhalb_eines_levels_nicht_mehr_gameover_gehen"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 
@@ -392,7 +392,7 @@
                             android:id="@+id/textView19"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Verkürzung"
+                            android:text="@string/verk_rzung"
                             android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -402,7 +402,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Die Schlange wird kürzer."
+                            android:text="@string/die_schlange_wird_k_rzer"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 
@@ -429,7 +429,7 @@
                             android:id="@+id/textView20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Invertierung"
+                            android:text="@string/invertierung"
                             android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -439,7 +439,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Die Steuerung wird invertiert."
+                            android:text="@string/die_steuerung_wird_invertiert"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 
@@ -467,7 +467,7 @@
                             android:id="@+id/textView21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Geschwindigkeits-Boost"
+                            android:text="@string/geschwindigkeits_boost"
                             android:textColor="@color/textColor"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -477,7 +477,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Erhöht die Bewegungsgeschwindigkeit"
+                            android:text="@string/erh_ht_die_bewegungsgeschwindigkeit"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
 

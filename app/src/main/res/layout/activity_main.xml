@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="20dp"
-                    android:text="Anleitung"
+                    android:text="@string/anleitung"
                     android:textSize="16sp" />
 
                 <TextView
@@ -106,7 +106,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="20dp"
-                    android:text="Message"
+                    android:text="@string/message"
                     android:textSize="16sp" />
 
                 <TextView

@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginBottom="9dp"
-                        android:text="Schwierigkeitsgrad"
+                        android:text="@string/schwierigkeitsgrad"
                         android:textColor="@color/textColor"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -74,7 +74,7 @@
                                 android:id="@+id/radioButtonEasy"
                                 android:layout_width="150dp"
                                 android:layout_height="wrap_content"
-                                android:text="Easy"
+                                android:text="@string/easy"
                                 android:textColor="@color/textColor"
                                 android:textSize="16sp" />
 
@@ -84,7 +84,7 @@
                                 android:layout_height="wrap_content"
                                 android:buttonTint="@color/pirateRed"
                                 android:checked="true"
-                                android:text="Medium"
+                                android:text="@string/medium"
                                 android:textColor="@color/textColor"
                                 android:textSize="16sp" />
 
@@ -92,7 +92,7 @@
                                 android:id="@+id/radioButtonHard"
                                 android:layout_width="150dp"
                                 android:layout_height="wrap_content"
-                                android:text="Hard"
+                                android:text="@string/hard"
                                 android:textColor="@color/textColor"
                                 android:textSize="16sp" />
 
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginBottom="9dp"
-                        android:text="Spielfeld"
+                        android:text="@string/spielfeld"
                         android:textColor="@color/textColor"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -143,7 +143,7 @@
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="110dp"
-                        android:text="Klein"
+                        android:text="@string/klein"
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
 
@@ -152,7 +152,7 @@
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="110dp"
-                        android:text="Mittel"
+                        android:text="@string/mittel"
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
 
@@ -160,7 +160,7 @@
                         android:id="@+id/radioButtonL"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Groß"
+                        android:text="@string/gro"
                         android:textColor="@color/textColor"
                         android:textSize="16sp" />
 
