@@ -9,6 +9,7 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.util.*
@@ -19,7 +20,7 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
         var invertedControls = false
     }
 
-    private val boardSize = 20
+    private val boardSize = SettingsActivity.boardSize
     private var pointSize = 0f
     private var w = Resources.getSystem().displayMetrics.widthPixels
     private var h = Resources.getSystem().displayMetrics.heightPixels
@@ -447,7 +448,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun drawBoard(canvas: Canvas?) {
-        canvas?.drawRGB(255,255,255)
+        var backgroundColor = resources.getColor(R.color.gameBoy)
+        canvas?.drawColor(backgroundColor)
         val boardLeft = w * 0.05f
         val boardRight = w * 0.95f
         val boardTop = h * 0.02f
@@ -522,15 +524,45 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         val textPaint = Paint()
         textPaint.color = Color.BLACK
-        val textSize = 20
-        val textSizeRelative = textSize * resources.displayMetrics.scaledDensity
+        var textSize = 20F
+        var numberPositionX = -5F
+        var numberPositionY = 5F
+
+
+        var textSizeRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textSize, resources.displayMetrics)
+        var numberPositionXRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionX, resources.displayMetrics)
+        var numberPositionYRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionY, resources.displayMetrics)
+
+        if(boardSize == 20) {
+            textSize = 20F
+            textSizeRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textSize, resources.displayMetrics)
+            numberPositionX = -5F
+            numberPositionY = 5F
+            numberPositionXRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionX, resources.displayMetrics)
+            numberPositionYRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionY, resources.displayMetrics)
+        } else if(boardSize == 30) {
+            textSize = 15F
+            textSizeRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textSize, resources.displayMetrics)
+            numberPositionX = -5F
+            numberPositionY = 5F
+            numberPositionXRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionX, resources.displayMetrics)
+            numberPositionYRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionY, resources.displayMetrics)
+        } else if(boardSize == 40) {
+            textSize = 10F
+            textSizeRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textSize, resources.displayMetrics)
+            numberPositionX = -5F
+            numberPositionY = 5F
+            numberPositionXRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionX, resources.displayMetrics)
+            numberPositionYRelative = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, numberPositionY, resources.displayMetrics)
+        }
+
         textPaint.textSize = textSizeRelative
         textPaint.isAntiAlias = true
         textPaint.style = Paint.Style.FILL
 
         for(i in 0..islandList.size-1) {
             canvas?.drawText((i+1).toString(),
-                getPointRectangle(islandList.get(i)).centerX().toFloat() -10F, getPointRectangle(islandList.get(i)).centerY().toFloat()+10F, textPaint)
+                getPointRectangle(islandList.get(i)).centerX().toFloat()  + numberPositionXRelative, getPointRectangle(islandList.get(i)).centerY().toFloat() + numberPositionYRelative, textPaint)
         }
 
     }

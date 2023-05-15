@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Snake4iU</string>
+    <string name="app_name">Pirates of the IU</string>
     <string name="credits">Credits</string>
     <string name="snake_4_i_u">Snake 4 (i)U</string>
     <string name="spiel_starten">Start Game</string>
@@ -31,4 +31,29 @@
     <string name="hard">Hard</string>
     <string name="schwierigkeitsgrad">Difficulty</string>
     <string name="highscore">Highscore</string>
+    <string name="du_hast_eine_schatzkarte_gefunden_die_dich_zu_einem_piratenschatz_f_hrt_auf_der_jagd_nach_dem_piratenschatz_musst_du_alle_schl_ssel_auf_den_inseln_einsammeln_um_die_schatztruhe_ffnen_zu_k_nnen_und_das_abenteuer_erfolgreich_zu_bestehen">You found a treasure map that leads you to a pirate treasure. On the hunt for the pirate treasure, you must collect all the keys on the islands in order to be able to open the treasure chest and complete the adventure successfully.</string>
+    <string name="auf_der_schatzkarte_siehst_du_die_inseln_die_du_dazu_der_reihenfolge_nach_ansteuern_musst_aber_nat_rlich_ist_der_schatz_verflucht_um_dem_fluch_zu_entgehen_darfst_du_deinen_zur_ckgelegten_weg_nicht_kreuzen">On the treasure map you can see the islands that you must head for in order. But of course the treasure is cursed - to avoid the curse you must not cross the path you have traveled.</string>
+    <string name="der_klabautermann_hat_unterwegs_einige_sachen_verloren_manche_davon_werden_dir_helfen_das_abenteuer_zu_bestehen_andere_erschweren_deine_reise_plane_deinen_weg_weise_setze_die_segel_und_nenne_den_gr_ten_piratenschatz_dein_eigen">In the water you will find some gifts from Poseidon, but beware - while some of them will help you on your journey others might seal your fate. Plan your route wisely, set sail and call the greatest pirate treasure your own!</string>
+    <string name="steuerung">Controls</string>
+    <string name="steuerung_der_bewegungsrichtung">Controls of the moving direction</string>
+    <string name="startet_das_level">Starts the level</string>
+    <string name="er_ht_die_geschwindigkeit">Increases speed. If you press it again, it is reduced to normal.</string>
+    <string name="bonuspunkte">Bonuspoints</string>
+    <string name="verleiht_bonuspunkte">Increases points for reaching an island for one level.</string>
+    <string name="farbwechsel">Colorchange</string>
+    <string name="ndert_die_farbe_der_schlange">Changes the boat\'s color.</string>
+    <string name="sammelt_man_dies_ein_kann_man_innerhalb_eines_levels_nicht_mehr_gameover_gehen">If you collect this, you can no longer go GameOver within a level.</string>
+    <string name="verk_rzung">Shortening</string>
+    <string name="die_schlange_wird_k_rzer">The boat gets shorter.</string>
+    <string name="invertierung">Inversion</string>
+    <string name="die_steuerung_wird_invertiert">The controls are inverted.</string>
+    <string name="geschwindigkeits_boost">Speed-Boost</string>
+    <string name="erh_ht_die_bewegungsgeschwindigkeit">Increases movement speed</string>
+    <string name="anleitung">Instructions</string>
+    <string name="message">Message</string>
+    <string name="spielfeld">Gaming area</string>
+    <string name="klein">Small</string>
+    <string name="mittel">Medium</string>
+    <string name="gro">Big</string>
+    <string name="diese_app_wurde_im_rahmen_eines_studiengangs_entwickelt_und_wird_weder_kommerziell_genutzt_noch_ver_ffentlicht">This app was developed as part of a study program and is neither used commercially nor published.</string>
 </resources>
