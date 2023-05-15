@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Snake4iU</string>
+    <string name="app_name">Pirates of the IU</string>
     <string name="credits">Credits</string>
     <string name="snake_4_i_u">Snake 4 (i)U</string>
     <string name="spiel_starten">Start Game</string>
@@ -55,4 +55,5 @@
     <string name="klein">Small</string>
     <string name="mittel">Medium</string>
     <string name="gro">Big</string>
+    <string name="diese_app_wurde_im_rahmen_eines_studiengangs_entwickelt_und_wird_weder_kommerziell_genutzt_noch_ver_ffentlicht">This app was developed as part of a study program and is neither used commercially nor published.</string>
 </resources>

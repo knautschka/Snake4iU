@@ -15,13 +15,17 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Diese App wurde im Rahmen eines Studiengangs entwickelt und wird weder kommerziell genutzt noch veröffentlicht."
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:text="@string/diese_app_wurde_im_rahmen_eines_studiengangs_entwickelt_und_wird_weder_kommerziell_genutzt_noch_ver_ffentlicht"
             android:textColor="@color/textColor"
-            android:textSize="20sp" />
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
