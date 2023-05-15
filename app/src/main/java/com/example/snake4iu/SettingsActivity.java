@@ -12,7 +12,7 @@ public class SettingsActivity extends AppCompatActivity {
     public static float speed = 1;
     public static int snakeColor = Color.rgb(255,165,0);
 
-    public static int boardSize = 30;
+    public static int boardSize = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

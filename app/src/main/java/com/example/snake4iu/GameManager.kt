@@ -447,7 +447,8 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
     }
 
     fun drawBoard(canvas: Canvas?) {
-        canvas?.drawRGB(255,255,255)
+        var backgroundColor = resources.getColor(R.color.gameBoy)
+        canvas?.drawColor(backgroundColor)
         val boardLeft = w * 0.05f
         val boardRight = w * 0.95f
         val boardTop = h * 0.02f
@@ -522,8 +523,20 @@ class GameManager(context: Context, attributeSet: AttributeSet): SurfaceView(con
 
         val textPaint = Paint()
         textPaint.color = Color.BLACK
-        val textSize = 20
-        val textSizeRelative = textSize * resources.displayMetrics.scaledDensity
+        var textSize = 20
+
+
+        if(boardSize == 20) {
+            textSize = 20
+        } else if(boardSize == 30) {
+            textSize = 15
+        } else if(boardSize == 40) {
+            textSize = 10
+        }
+
+        var textSizeRelative = textSize * resources.displayMetrics.scaledDensity
+
+
         textPaint.textSize = textSizeRelative
         textPaint.isAntiAlias = true
         textPaint.style = Paint.Style.FILL
